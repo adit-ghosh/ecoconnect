@@ -933,7 +933,8 @@
             const hamburger = document.getElementById('hamburger-menu');
             const navMenu = document.querySelector('.first-box-mobile');
             if (hamburger && navMenu) {
-                hamburger.addEventListener('click', function() {
+                hamburger.addEventListener('click', function(e) {
+                    e.stopPropagation();
                     navMenu.classList.toggle('hidden');
                     navMenu.classList.toggle('slide-down');
                 });
