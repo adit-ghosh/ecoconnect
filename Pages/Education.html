@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,600,700&amp;display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'quicksand': ['Quicksand', 'sans-serif']
+                    },
+                    colors: {
+                        'ecogreen': '#43e08d',
+                        'ecoblue': '#6ed1ff',
+                        'ecoteal': '#6dffdd',
+                        'ecodark': '#363636',
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer base {
+            body {
+                font-family: 'Quicksand', sans-serif;
+            }
+            .gradient-bg {
+                background: #83a4d4;
+                background: linear-gradient(to right, #b6fbff, #83a4d4);
+            }
+            .calculator-bg {
+                background: #C9FFBF;
+                background: linear-gradient(to right, #FFAFBD, #C9FFBF);
+            }
+        }
+        @layer utilities {
+            .animation-slide-down {
+                animation: slideDown 0.3s;
+            }
+            @keyframes slideDown {
+                from { opacity: 0; transform: translateY(-20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        }
+        .navbar-gradient {
+            background: linear-gradient(90deg, rgba(42, 123, 155, 1) 0%, rgba(62, 157, 145, 1) 22%, rgba(72, 173, 140, 1) 33%, rgba(87, 199, 133, 1) 50%, rgba(237, 221, 83, 1) 100%);
+        }
+        .footer-gradient {
+            background: linear-gradient(to right, #4CA1AF, #2C3E50);
+        }
+        .nav-link-hover:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .feature-card-hover:hover {
+            background-color: #006666;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-quicksand">
+<!-- Header/Navigation -->
+<header>
+    <div class="navbar-gradient fixed w-full h-20 flex justify-center items-center px-5 py-5 text-white z-50 top-0 left-0">
+        <div class="flex justify-between items-center w-full max-w-7xl">
+            <!-- Logo -->
+            <a href="./index.html">
+            <div class="flex items-center">
+                <i class="fa-solid fa-leaf text-3xl md:text-4xl"></i>
+                <span class="ml-2 text-2xl md:text-3xl font-bold">EcoConnect</span>
+            </div>
+            </a>
+            <!-- Hamburger menu button -->
+            <div class="hamburger flex flex-col cursor-pointer w-8 h-8 justify-center items-center ml-2 md:hidden" id="hamburger-menu" aria-label="Open navigation" tabindex="0">
+                <span class="h-1 w-7 bg-white my-0.5 rounded"></span>
+                <span class="h-1 w-7 bg-white my-0.5 rounded"></span>
+                <span class="h-1 w-7 bg-white my-0.5 rounded"></span>
+            </div>
+            <!-- Navigation Links -->
+            <div class="first-box hidden md:flex justify-evenly items-center flex-1 mx-4">
+                <div class="nav-link-hover p-3 rounded">
+                    <a href="./Community_Forum.html" class="flex items-center text-white no-underline">
+                        <i class="fa-solid fa-people-group text-xl md:text-2xl"></i>
+                        <span class="ml-2 text-base md:text-xl">Community Forum</span>
+                    </a>
+                </div>
+                <div class="nav-link-hover p-3 rounded">
+                    <a href="./Eco_Ride.html" class="flex items-center text-white no-underline">
+                        <i class="fa-solid fa-car-side text-xl md:text-2xl"></i>
+                        <span class="ml-2 text-base md:text-xl">Eco-Ride</span>
+                    </a>
+                </div>
+                <div class="nav-link-hover p-3 rounded">
+                    <a href="./Shopping_Assistant.html" class="flex items-center text-white no-underline">
+                        <i class="fa-solid fa-cart-shopping text-xl md:text-2xl"></i>
+                        <span class="ml-2 text-base md:text-xl">Shopping Assistant</span>
+                    </a>
+                </div>
+                <div class="nav-link-hover p-3 rounded">
+                    <a href="./Education.html" class="flex items-center text-white no-underline">
+                        <i class="fa-solid fa-book text-xl md:text-2xl"></i>
+                        <span class="ml-2 text-base md:text-xl">Education</span>
+                    </a>
+                </div>
+            </div>
+            <!-- Profile Link -->
+            <div class="nav-link-hover p-3 rounded">
+                <a href="./Profile.html" class="flex items-center text-white no-underline">
+                    <i class="fa-solid fa-user text-xl md:text-2xl"></i>
+                    <span class="ml-2 text-base md:text-xl">Profile</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- Mobile Navigation -->
+    <div class="first-box-mobile hidden absolute top-20 left-0 w-full bg-white shadow-lg z-40 md:hidden">
+        <div class="flex flex-col py-2">
+            <a href="./index.html" class="flex items-center p-4 text-gray-800 hover:bg-gray-100">
+                <i class="fa-solid fa-house text-xl mr-3"></i>
+                <span class="text-lg">Home</span>
+            </a>
+            <a href="./Community_Forum.html" class="flex items-center p-4 text-gray-800 hover:bg-gray-100">
+                <i class="fa-solid fa-people-group text-xl mr-3"></i>
+                <span class="text-lg">Community Forum</span>
+            </a>
+            <a href="./Eco_Ride.html" class="flex items-center p-4 text-gray-800 hover:bg-gray-100">
+                <i class="fa-solid fa-car-side text-xl mr-3"></i>
+                <span class="text-lg">Eco-Ride</span>
+            </a>
+            <a href="./Shopping_Assistant.html" class="flex items-center p-4 text-gray-800 hover:bg-gray-100">
+                <i class="fa-solid fa-cart-shopping text-xl mr-3"></i>
+                <span class="text-lg">Shopping Assistant</span>
+            </a>
+            <a href="./Education.html" class="flex items-center p-4 text-gray-800 hover:bg-gray-100">
+                <i class="fa-solid fa-book text-xl mr-3"></i>
+                <span class="text-lg">Education</span>
+            </a>
+            <a href="./Profile.html" class="flex items-center p-4 text-gray-800 hover:bg-gray-100">
+                <i class="fa-solid fa-user text-xl mr-3"></i>
+                <span class="text-lg">Profile</span>
+            </a>
+        </div>
+    </div>
+</header>
+<!-- Main Content -->
+<main class="gradient-bg min-h-screen pb-12">
+    <div class="content py-24 px-4">
+        <div class="title bg-gray-100 py-8 px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Carbon Footprint Calculator Activity!</h2>
+            <br>
+            <h3 class="text-xl md:text-2xl italic text-gray-600">How big is your carbon footprint?</h3>
+        </div>
+        <div id="def" class="box bg-ecodark text-white rounded-lg shadow-lg p-6 max-w-4xl mx-auto my-8">
+            <h2 class="text-2xl font-bold mb-4 text-center">What is your carbon footprint?</h2>
+            <p class="mb-4">Many of our daily activities result in greenhouse gas emissions (ex. carbon dioxide, methane, nitrous oxide). Added together, these emissions make up YOUR carbon footprint. Each person's carbon footprint differs based on where they live, their habits, and every day choices.</p>
+            <p class="text-center">
+                <button id="start" class="bg-ecogreen hover:bg-green-500 text-gray-800 font-bold py-3 px-6 rounded-full text-lg transition duration-300 transform hover:scale-105" onclick="startSurvey()">
+                    >> Calculate your carbon footprint!
+                </button>
+            </p>
+        </div>
+        <div id="calculator" class="hidden calculator-bg rounded-lg shadow-lg p-6 max-w-4xl mx-auto my-8">
+            <ol class="space-y-6">
+                <li>
+                    <b class="text-lg">What is the size of your home?</b><br>
+                    <div class="mt-2 space-y-2">
+                        <label class="flex items-center">
+                            <input type="radio" name="size" value="apartment" class="mr-2">
+                            Apartment (1 bedroom or studio)
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="size" value="smallhouse" class="mr-2">
+                            Small House (2 bedrooms)
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="size" value="mediumhouse" class="mr-2">
+                            Medium House (3 bedrooms)
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="size" value="largehouse" class="mr-2">
+                            Large House (4+ bedrooms)
+                        </label>
+                    </div>
+                </li>
+                <li>
+                    <b class="text-lg">What best describes where your home is located?</b><br>
+                    <div class="mt-2 space-y-2">
+                        <label class="flex items-center">
+                            <input type="radio" name="location" value="newsuburb" class="mr-2">
+                            Newer Suburb
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="location" value="rural" class="mr-2">
+                            Rural/Farm/Country
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="location" value="oldsuburb" class="mr-2">
+                            Older Suburb
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="location" value="city" class="mr-2">
+                            Big City
+                        </label>
+                    </div>
+                </li>
+                <li>
+                    <b class="text-lg">What best describes your diet?</b><br>
+                    <div class="mt-2 space-y-2">
+                        <label class="flex items-center">
+                            <input type="radio" name="diet" value="vegetarian" class="mr-2">
+                            Vegetarian (primarily plant-based, some dairy)
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="diet" value="carnivore" class="mr-2">
+                            Carnivore (lots of meat, seafood, or dairy)
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="diet" value="vegan" class="mr-2">
+                            Vegan (only plant-based foods)
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="diet" value="omnivore" class="mr-2">
+                            Omnivore (meat, seafood, veggies, & dairy)
+                        </label>
+                    </div>
+                </li>
+                <li>
+                    <b class="text-lg">Where does most of your food come from?</b><br>
+                    <div class="mt-2 space-y-2">
+                        <label class="flex items-center">
+                            <input type="radio" name="food" value="naturalmarket" class="mr-2">
+                            Natural Foods Markets (lots of organic)
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="food" value="supermarket" class="mr-2">
+                            Supermarket (few organic foods)
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="food" value="farmersmarket" class="mr-2">
+                            Farmers Markets (local, organic)
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="food" value="restaurantsfastfood" class="mr-2">
+                            Restaurants and Fast Food (no organic)
+                        </label>
+                    </div>
+                </li>
+                <li>
+                    <b class="text-lg">How many trashcans does your family use each week?</b><br>
+                    <div class="mt-2 space-y-2">
+                        <label class="flex items-center">
+                            <input type="radio" name="trash" value="lessthanone" class="mr-2">
+                            Less than 1
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="trash" value="oneortwo" class="mr-2">
+                            1 or 2
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="trash" value="twoormore" class="mr-2">
+                            2 or more
+                        </label>
+                    </div>
+                </li>
+                <li>
+                    <b class="text-lg">Does your family recycle?</b><br>
+                    <div class="mt-2 space-y-2">
+                        <label class="flex items-center">
+                            <input type="radio" name="recycle" value="always" class="mr-2">
+                            All the time
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="recycle" value="sometimes" class="mr-2">
+                            Sometimes
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="recycle" value="never" class="mr-2">
+                            Never
+                        </label>
+                    </div>
+                </li>
+                <li>
+                    <b class="text-lg">When you travel, which mode of transportation do you use most often?</b><br>
+                    <div class="mt-2 space-y-2">
+                        <label class="flex items-center">
+                            <input type="radio" name="travel" value="truck" class="mr-2">
+                            Large car or truck
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="travel" value="busortrain" class="mr-2">
+                            Bus or train
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="travel" value="smallcarorcarpool" class="mr-2">
+                            Small car or carpool
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="travel" value="bike" class="mr-2">
+                            Bicycle
+                        </label>
+                    </div>
+                </li>
+            </ol>
+            <p class="text-center mt-6">
+                <button id="submit" class="bg-ecogreen hover:bg-green-500 text-gray-800 font-bold py-3 px-6 rounded-full text-lg transition duration-300 transform hover:scale-105" onclick="calculate()">
+                    Calculate!
+                </button>
+            </p>
+        </div>
+        <div id="results" class="hidden bg-ecoblue text-gray-800 rounded-lg shadow-lg p-6 max-w-4xl mx-auto my-8">
+            <h2 id="totalscore" class="text-2xl font-bold text-center"></h2>
+        </div>
+        <div id="footsize" class="hidden bg-ecogreen text-white rounded-lg shadow-lg p-6 max-w-4xl mx-auto my-8">
+            <div class="text-center">
+                <h2 class="text-2xl font-bold mb-4">YOU ARE A...</h2>
+                <div class="flex justify-center mb-4">
+                    <svg width="200" height="236" viewBox="0 0 678 801" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M305.854 683.71C314.345 759.56 294.897 790.098 241.883 798.886C188.903 807.804 137.337 762.325 126.546 697.465C121.578 667.651 111.837 610.063 105.781 583.573C96.1721 541.353 70.5038 486.399 60.5342 453.921C58.2641 446.484 32.2993 393.305 26.2771 363.952C16.3715 316.269 47.0078 269.641 94.6262 259.638L177.913 242.393C190.419 239.729 227.602 237.163 227.602 237.163C278.74 236.832 303.617 263.158 303.88 314.329C304.011 343.911 277.127 388.566 256.295 391.86C235.4 395.15 226.218 392.813 212.069 392.88C191.732 392.978 181.631 423.352 179.327 439.936C178.078 448.885 177.781 490.778 204.073 543.987C230.398 597.099 294.534 582.357 305.854 683.71ZM243.857 223.899C265.015 223.801 282.095 198.527 281.93 167.497C281.765 136.466 264.49 111.357 243.332 111.488C222.106 111.62 205.06 136.86 205.258 167.891C205.39 198.891 222.665 224 243.857 223.899ZM118.385 232.488C131.022 229.46 137.57 212.151 133.127 193.822C128.617 175.56 114.963 163.118 102.423 166.082C89.8535 169.144 83.3059 186.452 87.7148 204.714C92.191 223.077 105.812 235.549 118.385 232.488ZM173.733 218.571C188.805 216.432 198.216 196.917 194.925 175.034C191.668 153.249 176.956 137.423 162.052 139.528C147.145 141.832 137.637 161.313 140.928 183.128C144.249 204.913 158.859 220.74 173.733 218.571ZM32.5957 255.128C27.7254 242.888 17.0317 235.745 8.73939 239.069C0.282064 242.427 -2.48316 255.03 2.42081 267.203C7.32478 279.378 18.1162 286.485 26.4085 283.194C34.7344 279.843 37.5637 267.27 32.5957 255.128ZM68.2673 255.094C78.7961 250.881 82.3191 234.855 76.0982 219.456C69.8773 203.923 56.223 194.809 45.792 199.12C35.1285 203.3 31.6762 219.359 37.7961 234.758C44.0473 250.258 57.6376 259.308 68.2673 255.094ZM305.854 683.71C314.345 759.56 294.897 790.098 241.883 798.886C188.903 807.804 137.337 762.325 126.546 697.465C121.578 667.651 111.837 610.063 105.781 583.573C96.1721 541.353 70.5038 486.399 60.5342 453.921C58.2641 446.484 32.2993 393.305 26.2771 363.952C16.3715 316.269 47.0078 269.641 94.6262 259.638L177.913 242.393C190.419 239.729 227.602 237.163 227.602 237.163C278.74 236.832 303.617 263.158 303.88 314.329C304.011 343.911 277.127 388.566 256.295 391.86C235.4 395.15 226.218 392.813 212.069 392.88C191.732 392.978 181.631 423.352 179.327 439.936C178.078 448.885 177.781 490.778 204.073 543.987C230.398 597.099 294.534 582.357 305.854 683.71ZM243.857 223.899C265.015 223.801 282.095 198.527 281.93 167.497C281.765 136.466 264.49 111.357 243.332 111.488C222.106 111.62 205.06 136.86 205.258 167.891C205.39 198.891 222.665 224 243.857 223.899ZM118.385 232.488C131.022 229.46 137.57 212.151 133.127 193.822C128.617 175.56 114.963 163.118 102.423 166.082C89.8535 169.144 83.3059 186.452 87.7148 204.714C92.191 223.077 105.812 235.549 118.385 232.488ZM173.733 218.571C188.805 216.432 198.216 196.917 194.925 175.034C191.668 153.249 176.956 137.423 162.052 139.528C147.145 141.832 137.637 161.313 140.928 183.128C144.249 204.913 158.859 220.74 173.733 218.571ZM32.5957 255.128C27.7254 242.888 17.0317 235.745 8.73939 239.069C0.282064 242.427 -2.48316 255.03 2.42081 267.203C7.32478 279.378 18.1162 286.485 26.4085 283.194C34.7344 279.843 37.5637 267.27 32.5957 255.128ZM68.2673 255.094C78.7961 250.881 82.3191 234.855 76.0982 219.456C69.8773 203.923 56.223 194.809 45.792 199.12C35.1285 203.3 31.6762 219.359 37.7961 234.758C44.0473 250.258 57.6376 259.308 68.2673 255.094ZM473.319 432.563C499.645 379.32 499.348 337.428 498.065 328.479C495.795 311.894 485.691 281.487 465.354 281.389C451.171 281.322 442.023 283.659 421.094 280.369C400.232 277.078 373.411 232.457 373.543 202.838C373.839 151.666 398.716 125.375 449.787 125.638C449.787 125.638 486.97 128.238 499.51 130.902L582.796 148.147C630.347 158.15 661.081 204.778 651.078 252.43C645.022 281.783 619.091 334.993 616.821 342.399C606.818 374.911 581.183 429.865 571.574 472.051C565.518 498.575 555.811 556.163 550.81 585.944C540.015 650.837 488.452 696.313 435.472 687.394C382.492 678.577 363.044 648.072 371.535 572.219C382.923 470.933 447.025 485.577 473.319 432.563ZM472.168 56.4029C472.363 25.3388 455.287 0.131869 434.125 0.00051304C412.933 -0.130843 395.658 24.9784 395.493 56.0088C395.328 87.0392 412.407 112.313 433.566 112.411C454.728 112.479 472.036 87.3693 472.168 56.4029ZM589.711 93.2264C594.12 74.9308 587.572 57.6221 575.036 54.5605C562.467 51.5999 548.809 64.0384 544.235 82.3339C539.826 100.663 546.374 117.972 559.011 121C571.577 124.061 585.201 111.556 589.711 93.2264ZM536.498 71.6065C539.789 49.7576 530.278 30.3068 515.306 28.0063C500.466 25.9013 485.755 41.728 482.464 63.5129C479.173 85.3955 488.651 104.91 503.69 107.049C518.567 109.252 533.144 93.4251 536.498 71.6065ZM650.95 171.71C659.276 175.001 670.037 167.86 674.938 155.685C679.808 143.509 677.043 130.905 668.653 127.551C660.361 124.226 649.667 131.337 644.763 143.61C639.829 155.749 642.658 168.322 650.95 171.71ZM639.63 123.236C645.784 107.837 642.294 91.7781 631.668 87.5983C621.27 83.2534 607.613 92.3709 601.328 107.901C595.141 123.334 598.596 139.359 609.192 143.573C619.788 147.786 633.345 138.736 639.63 123.236ZM473.319 432.563C499.645 379.32 499.348 337.428 498.065 328.479C495.795 311.894 485.691 281.487 465.354 281.389C451.171 281.322 442.023 283.659 421.094 280.369C400.232 277.078 373.411 232.457 373.543 202.838C373.839 151.666 398.716 125.375 449.787 125.638C449.787 125.638 486.97 128.238 499.51 130.902L582.796 148.147C630.347 158.15 661.081 204.778 651.078 252.43C645.022 281.783 619.091 334.993 616.821 342.399C606.818 374.911 581.183 429.865 571.574 472.051C565.518 498.575 555.811 556.163 550.81 585.944C540.015 650.837 488.452 696.313 435.472 687.394C382.492 678.577 363.044 648.072 371.535 572.219C382.923 470.933 447.025 485.577 473.319 432.563ZM472.168 56.4029C472.363 25.3388 455.287 0.131869 434.125 0.00051304C412.933 -0.130843 395.658 24.9784 395.493 56.0088C395.328 87.0392 412.407 112.313 433.566 112.411C454.728 112.479 472.036 87.3693 472.168 56.4029ZM589.711 93.2264C594.12 74.9308 587.572 57.6221 575.036 54.5605C562.467 51.5999 548.809 64.0384 544.235 82.3339C539.826 100.663 546.374 117.972 559.011 121C571.577 124.061 585.201 111.556 589.711 93.2264ZM536.498 71.6065C539.789 49.7576 530.278 30.3068 515.306 28.0063C500.466 25.9013 485.755 41.728 482.464 63.5129C479.173 85.3955 488.651 104.91 503.69 107.049C518.567 109.252 533.144 93.4251 536.498 71.6065ZM650.95 171.71C659.276 175.001 670.037 167.86 674.938 155.685C679.808 143.509 677.043 130.905 668.653 127.551C660.361 124.226 649.667 131.337 644.763 143.61C639.829 155.749 642.658 168.322 650.95 171.71ZM639.63 123.236C645.784 107.837 642.294 91.7781 631.668 87.5983C621.27 83.2534 607.613 92.3709 601.328 107.901C595.141 123.334 598.596 139.359 609.192 143.573C619.788 147.786 633.345 138.736 639.63 123.236Z" fill="white" />
+                    </svg>
+                </div>
+                <h3 id="bigfoot" class="hidden text-2xl font-bold">Carbon Bigfoot!</h3>
+                <h3 id="mediumfoot" class="hidden text-2xl font-bold">Carbon Medium Foot!</h3>
+                <h3 id="littlefoot" class="hidden text-2xl font-bold">Carbon Little Foot!</h3>
+            </div>
+        </div>
+        <div id="reducefootprint" class="hidden bg-ecoteal rounded-lg shadow-lg p-6 max-w-4xl mx-auto my-8">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-4">What can you do to reduce your carbon footprint?</h2>
+            <p class="mb-4">Regardless of whether you are a Carbon Bigfoot, Medium Foot, or Little Foot, there are steps you can take to reduce your carbon footprint. If we all work together, we can make a difference!</p>
+            <ul class="list-disc pl-6 space-y-2">
+                <li>Use appliances and lightbulbs that are more energy efficient (ENERGY STAR®)</li>
+                <li>Turn down your heating thermostat in the winter and turn up your air conditioning in the summer</li>
+                <li>Wash your clothes in cold water and line dry them</li>
+                <li>Take public transportation, carpool with others, or bike when possible</li>
+                <li>Try to eat more organic and locally sourced foods</li>
+                <li>Use rechargeable batteries</li>
+                <li>Print double-sided!</li>
+            </ul>
+        </div>
+    </div>
+</main>
+<!-- Footer -->
+<footer class="footer-gradient text-white py-8 px-4">
+    <div class="max-w-7xl mx-auto">
+        <div class="footer-content flex flex-col md:flex-row justify-between items-center">
+            <div class="footer-section p-4 flex items-center">
+                <i class="fa-solid fa-leaf text-3xl md:text-4xl"></i>
+                <span class="ml-2 text-2xl md:text-3xl font-bold">EcoConnect</span>
+            </div>
+            <div class="footer-section social flex mt-6 md:mt-0 md:ml-auto">
+                <div class="follow p-5 rounded-full mx-2">
+                    <i class="fa-brands fa-instagram text-3xl md:text-4xl"></i>
+                </div>
+                <div class="follow p-5 rounded-full mx-2">
+                    <i class="fa-brands fa-twitter text-3xl md:text-4xl"></i>
+                </div>
+                <div class="follow p-5 rounded-full mx-2">
+                    <i class="fa-brands fa-facebook text-3xl md:text-4xl"></i>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom text-center mt-8 pt-6 border-t border-white border-opacity-30">
+            <p>© 2025 All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+<script>
+    // Mobile menu toggle
+    document.getElementById('hamburger-menu').addEventListener('click', function() {
+        const mobileMenu = document.querySelector('.first-box-mobile');
+        mobileMenu.classList.toggle('hidden');
+        mobileMenu.classList.toggle('animation-slide-down');
+    });
+    // Carbon Calculator Functions
+    function startSurvey() {
+        document.getElementById("def").classList.add('hidden');
+        document.getElementById("calculator").classList.remove('hidden');
+        window.scrollTo(0, 100);
+    }
+    function calculate() {
+        if (allComplete()) {
+            document.getElementById("calculator").classList.add('hidden');
+            document.getElementById("results").classList.remove('hidden');
+            document.getElementById("reducefootprint").classList.remove('hidden');
+            window.scrollTo(0, 100);
+            
+            let totalscore = 0;
+            totalscore += sizeScore();
+            totalscore += locationScore();
+            totalscore += dietScore();
+            totalscore += foodScore();
+            totalscore += trashScore();
+            totalscore += recycleScore();
+            totalscore += travelScore();
+            
+            document.getElementById("totalscore").textContent = `Your score was: ${totalscore}`;
+            showFootSize(totalscore);
+        } else {
+            alert("Please answer all of the questions.");
+        }
+    }
+    function showFootSize(score) {
+        document.getElementById("footsize").classList.remove('hidden');
+        document.getElementById("bigfoot").classList.add('hidden');
+        document.getElementById("mediumfoot").classList.add('hidden');
+        document.getElementById("littlefoot").classList.add('hidden');
+        
+        if (score >= 21) document.getElementById("bigfoot").classList.remove('hidden');
+        else if (score >= 13) document.getElementById("mediumfoot").classList.remove('hidden');
+        else document.getElementById("littlefoot").classList.remove('hidden');
+    }
+    function allComplete() {
+        return fourChecked("size") && 
+               fourChecked("location") && 
+               fourChecked("diet") && 
+               fourChecked("food") && 
+               threeChecked("trash") && 
+               threeChecked("recycle") && 
+               fourChecked("travel");
+    }
+    function sizeScore() {
+        const sizes = document.getElementsByName("size");
+        for (let i = 0; i < sizes.length; i++) {
+            if (sizes[i].checked) {
+                return [1, 2, 3, 4][i];
+            }
+        }
+        return 0;
+    }
+    function fourChecked(name) {
+        const list = document.getElementsByName(name);
+        for (let i = 0; i < list.length; i++) {
+            if (list[i].checked) return true;
+        }
+        return false;
+    }
+    function threeChecked(name) {
+        const list = document.getElementsByName(name);
+        for (let i = 0; i < list.length; i++) {
+            if (list[i].checked) return true;
+        }
+        return false;
+    }
+    function locationScore() {
+        const locations = document.getElementsByName("location");
+        for (let i = 0; i < locations.length; i++) {
+            if (locations[i].checked) {
+                return [4, 2, 3, 1][i];
+            }
+        }
+        return 0;
+    }
+    function dietScore() {
+        const diets = document.getElementsByName("diet");
+        for (let i = 0; i < diets.length; i++) {
+            if (diets[i].checked) {
+                return [2, 4, 1, 3][i];
+            }
+        }
+        return 0;
+    }
+    function foodScore() {
+        const foods = document.getElementsByName("food");
+        for (let i = 0; i < foods.length; i++) {
+            if (foods[i].checked) {
+                return [2, 3, 1, 4][i];
+            }
+        }
+        return 0;
+    }
+    function trashScore() {
+        const trashes = document.getElementsByName("trash");
+        for (let i = 0; i < trashes.length; i++) {
+            if (trashes[i].checked) {
+                return [1, 2, 3][i];
+            }
+        }
+        return 0;
+    }
+    function recycleScore() {
+        const recycles = document.getElementsByName("recycle");
+        for (let i = 0; i < recycles.length; i++) {
+            if (recycles[i].checked) {
+                return [1, 2, 3][i];
+            }
+        }
+        return 0;
+    }
+    function travelScore() {
+        const travels = document.getElementsByName("travel");
+        for (let i = 0; i < travels.length; i++) {
+            if (travels[i].checked) {
+                return [4, 2, 3, 1][i];
+            }
+        }
+        return 0;
+    }
+</script>
+</body>
+</html>

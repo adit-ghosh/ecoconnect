@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoConnect - Community Forum</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌱%3C/text%3E%3C/svg%3E">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4CAF50',
+                        secondary: '#FFC107',
+                        background: '#f4f7f6',
+                        card: '#ffffff',
+                        border: '#e0e0e0',
+                        ecoDark: '#388e3c'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .navbar-gradient {
+            background: linear-gradient(90deg, rgba(42, 123, 155, 1) 0%, rgba(62, 157, 145, 1) 22%, rgba(72, 173, 140, 1) 33%, rgba(87, 199, 133, 1) 50%, rgba(237, 221, 83, 1) 100%);
+        }
+        .footer-gradient {
+            background: linear-gradient(to right, #4CA1AF, #2C3E50);
+        }
+        .nav-link-hover:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .feature-card-hover:hover {
+            background-color: #006666;
+        }
+        .leaf-bg {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%234caf5050' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+        .badge-animation {
+            animation: badge-pop 0.5s ease-out;
+        }
+        @keyframes badge-pop {
+            0% { transform: scale(0); opacity: 0; }
+            70% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .progress-bar {
+            transition: width 0.5s ease-in-out;
+        }
+        .game-card {
+            transition: all 0.3s ease;
+        }
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .comment-enter {
+            animation: commentEnter 0.5s ease-out;
+        }
+        @keyframes commentEnter {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-background leaf-bg">
+    <!-- Header/Navigation -->
+    <header>
+        <div class="navbar-gradient fixed w-full h-20 flex justify-center items-center px-5 py-5 text-white z-50">
+            <div class="flex justify-between items-center w-full max-w-7xl">
+                <!-- Logo -->
+                <a href="./index.html">
+                <div class="flex items-center">
+                    <i class="fa-solid fa-leaf text-3xl md:text-4xl"></i>
+                    <span class="ml-2 text-2xl md:text-3xl font-bold">EcoConnect</span>
+                </div>
+                </a>
+
+                <!-- Hamburger menu button -->
+                <div class="hamburger flex flex-col cursor-pointer w-8 h-8 justify-center items-center ml-2 md:hidden" id="hamburger-menu" aria-label="Open navigation" tabindex="0">
+                    <span class="h-1 w-7 bg-white my-0.5 rounded"></span>
+                    <span class="h-1 w-7 bg-white my-0.5 rounded"></span>
+                    <span class="h-1 w-7 bg-white my-0.5 rounded"></span>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="first-box hidden md:flex justify-evenly items-center flex-1 mx-4">
+                     <div class="nav-link-hover p-3 rounded">
+                        <a href="./Community_Forum.html" class="flex items-center text-white no-underline">
+                            <i class="fa-solid fa-people-group text-xl md:text-2xl"></i>
+                            <span class="ml-2 text-base md:text-xl">Community Forum</span>
+                        </a>
+                    </div>
+                    
+                    <div class="nav-link-hover p-3 rounded">
+                        <a href="./Eco_Ride.html" class="flex items-center text-white no-underline">
+                            <i class="fa-solid fa-car-side text-xl md:text-2xl"></i>
+                            <span class="ml-2 text-base md:text-xl">Eco-Ride</span>
+                        </a>
+                    </div>
+                    
+                    <div class="nav-link-hover p-3 rounded">
+                        <a href="./Shopping_Assistant.html" class="flex items-center text-white no-underline">
+                            <i class="fa-solid fa-cart-shopping text-xl md:text-2xl"></i>
+                            <span class="ml-2 text-base md:text-xl">Shopping Assistant</span>
+                        </a>
+                    </div>
+                    
+                    <div class="nav-link-hover p-3 rounded">
+                        <a href="./Education.html" class="flex items-center text-white no-underline">
+                            <i class="fa-solid fa-book text-xl md:text-2xl"></i>
+                            <span class="ml-2 text-base md:text-xl">Education</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Profile Link -->
+                <div class="nav-link-hover p-3 rounded">
+                    <a href="./Profile.html" class="flex items-center text-white no-underline">
+                        <i class="fa-solid fa-user text-xl md:text-2xl"></i>
+                        <span class="ml-2 text-base md:text-xl">Profile</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Mobile Navigation -->
+        <div class="first-box-mobile hidden absolute top-20 left-0 w-full bg-white shadow-lg z-40 md:hidden">
+            <div class="flex flex-col py-2">
+                <a href="./index.html" class="flex items-center p-4 text-gray-800 hover:bg-gray-100">
+                    <i class="fa-solid fa-house text-xl mr-3"></i>
+                    <span class="text-lg">Home</span>
+                </a>
+                <a href="./Community_Forum.html" class="flex items-center p-4 text-gray-800 hover:bg-gray-100">
+                    <i class="fa-solid fa-people-group text-xl mr-3"></i>
+                    <span class="text-lg">Community Forum</span>
+                </a>
+                <a href="./Eco-Ride.html" class="flex items-center p-4 text-gray-800 hover:bg-gray-100">
+                    <i class="fa-solid fa-car-side text-xl mr-3"></i>
+                    <span class="text-lg font-bold">Eco-Ride</span>
+                </a>
+                <a href="./Shopping_Assistant.html" class="flex items-center p-4 text-gray-800 hover:bg-gray-100">
+                    <i class="fa-solid fa-cart-shopping text-xl mr-3"></i>
+                    <span class="text-lg">Shopping Assistant</span>
+                </a>
+                <a href="./Education.html" class="flex items-center p-4 text-gray-800 hover:bg-gray-100">
+                    <i class="fa-solid fa-book text-xl mr-3"></i>
+                    <span class="text-lg">Education</span>
+                </a>
+                <a href="./Profile.html" class="flex items-center p-4 text-gray-800 hover:bg-gray-100">
+                    <i class="fa-solid fa-user text-xl mr-3"></i>
+                    <span class="text-lg">Profile</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="max-w-7xl mx-auto px-4 py-8 pt-24">
+        <!-- Hero Section -->
+        <section class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-primary mb-4">Community Forum</h1>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                Connect with eco-conscious individuals, share ideas, and participate in events to make a difference together.
+            </p>
+        </section>
+
+        <!-- Collective Impact -->
+        <section class="bg-white rounded-xl shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold text-primary border-b-2 border-primary pb-2 mb-6">Our Collective Impact</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div class="bg-green-50 rounded-xl p-6 text-center">
+                    <div class="text-4xl font-bold text-ecoDark mb-2">5,230</div>
+                    <div class="text-gray-600">Trees Planted</div>
+                </div>
+                <div class="bg-green-50 rounded-xl p-6 text-center">
+                    <div class="text-4xl font-bold text-ecoDark mb-2">15,700</div>
+                    <div class="text-gray-600">kg CO2 Reduced</div>
+                </div>
+                <div class="bg-green-50 rounded-xl p-6 text-center">
+                    <div class="text-4xl font-bold text-ecoDark mb-2">2,150</div>
+                    <div class="text-gray-600">Events Joined</div>
+                </div>
+            </div>
+            <p class="text-center text-gray-600 italic">
+                These numbers reflect the collective efforts of our community to reduce carbon footprint and promote sustainability.
+            </p>
+        </section>
+
+        <!-- Gamification Section -->
+        <section class="bg-white rounded-xl shadow-lg p-6 mb-8">
+            <div class="flex flex-wrap justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-primary border-b-2 border-primary pb-2">Your Eco Journey</h2>
+                <div class="flex items-center mt-4 md:mt-0">
+                    <span class="text-lg font-semibold mr-2">Points:</span>
+                    <span id="user-points" class="text-3xl font-bold text-secondary">0</span>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <div class="flex justify-between mb-2">
+                    <span>Level Progress</span>
+                    <span id="level-text">Level 1: Eco Novice</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-4">
+                    <div id="level-progress" class="progress-bar bg-primary h-4 rounded-full" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <h3 class="text-xl font-semibold mb-4">Your Badges</h3>
+            <div id="badges-container" class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+                <!-- Badges will be dynamically added here -->
+            </div>
+            
+            <h3 class="text-xl font-semibold mb-4">Top Community Contributors</h3>
+            <ul class="bg-green-50 rounded-lg p-4">
+                <li class="flex justify-between py-2 border-b border-green-100"><span class="font-medium">1. Alice S.</span> <span class="text-secondary font-bold">1200 pts</span></li>
+                <li class="flex justify-between py-2 border-b border-green-100"><span class="font-medium">2. Bob K.</span> <span class="text-secondary font-bold">980 pts</span></li>
+                <li class="flex justify-between py-2 border-b border-green-100"><span class="font-medium">3. Charlie M.</span> <span class="text-secondary font-bold">750 pts</span></li>
+                <li class="flex justify-between py-2"><span class="font-medium">4. Dana P.</span> <span class="text-secondary font-bold">600 pts</span></li>
+            </ul>
+            <p class="text-gray-600 italic mt-4">
+                Points and badges are awarded for participation and engagement. Leaderboards foster friendly competition!
+            </p>
+        </section>
+
+        <!-- Events Section -->
+        <section class="bg-white rounded-xl shadow-lg p-6 mb-8">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-primary border-b-2 border-primary pb-2">Upcoming Carbon Reduction Events</h2>
+                <button class="bg-secondary hover:bg-yellow-500 text-gray-800 font-bold py-2 px-4 rounded transition" onclick="alert('In a live version, this button would lead to a form for submitting new event ideas for community review!');">
+                    Suggest an Event
+                </button>
+            </div>
+
+            <div id="event-list" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Events will be dynamically added here -->
+            </div>
+        </section>
+
+        <!-- Interactive Game Section -->
+        <section class="bg-white rounded-xl shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold text-primary border-b-2 border-primary pb-2 mb-6">Eco Challenge Game</h2>
+            
+            <div id="game-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="game-card bg-green-50 rounded-xl p-6 flex flex-col items-center justify-center">
+                    <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-4">
+                        <i class="fa-solid fa-seedling text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Plant the Forest</h3>
+                    <p class="text-gray-600 text-center mb-4">
+                        Answer eco-questions to plant trees and earn points. Each correct answer plants a tree!
+                    </p>
+                    <button id="start-game-btn" class="bg-primary hover:bg-green-600 text-white font-bold py-2 px-6 rounded-full transition">
+                        Start Game
+                    </button>
+                </div>
+                
+                <div id="game-area" class="hidden bg-blue-50 rounded-xl p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="text-lg font-semibold">
+                            <span id="current-score">Score: 0</span>
+                        </div>
+                        <div class="text-lg font-semibold">
+                            <span id="trees-planted">Trees: 0</span>
+                        </div>
+                    </div>
+                    
+                    <div id="question-container" class="mb-6">
+                        <h3 id="question-text" class="text-xl font-semibold mb-4"></h3>
+                        <div id="options-container" class="space-y-3">
+                            <!-- Options will be dynamically added here -->
+                        </div>
+                    </div>
+                    
+                    <div id="results-container" class="hidden text-center">
+                        <h3 class="text-2xl font-bold text-primary mb-4">Game Complete!</h3>
+                        <p class="text-xl mb-2">You planted <span id="final-trees" class="font-bold">0</span> trees!</p>
+                        <p class="text-lg mb-4">You earned <span id="final-points" class="font-bold text-secondary">0</span> points!</p>
+                        <button id="play-again-btn" class="bg-primary hover:bg-green-600 text-white font-bold py-2 px-6 rounded-full transition">
+                            Play Again
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Educational Content -->
+        <section class="mb-8">
+            <h2 class="text-2xl font-bold text-primary border-b-2 border-primary pb-2 mb-6">Learn & Explore</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="game-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="bg-green-100 h-40 flex items-center justify-center">
+                        <i class="fa-solid fa-recycle text-5xl text-primary"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-3">Recycling Guide</h3>
+                        <p class="text-gray-600 mb-4">
+                            Learn how to properly recycle different materials to reduce waste and conserve resources.
+                        </p>
+                        <button class="text-primary font-semibold flex items-center">
+                            Explore <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="game-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="bg-green-100 h-40 flex items-center justify-center">
+                        <i class="fa-solid fa-leaf text-5xl text-primary"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-3">Carbon Footprint</h3>
+                        <p class="text-gray-600 mb-4">
+                            Understand what a carbon footprint is and how you can reduce yours with simple lifestyle changes.
+                        </p>
+                        <button class="text-primary font-semibold flex items-center">
+                            Explore <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="game-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="bg-green-100 h-40 flex items-center justify-center">
+                        <i class="fa-solid fa-solar-panel text-5xl text-primary"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-3">Renewable Energy</h3>
+                        <p class="text-gray-600 mb-4">
+                            Discover the latest innovations in renewable energy and how they're transforming our world.
+                        </p>
+                        <button class="text-primary font-semibold flex items-center">
+                            Explore <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Community Forum Section -->
+        <section class="bg-white rounded-xl shadow-lg p-6">
+            <h2 class="text-2xl font-bold text-primary border-b-2 border-primary pb-2 mb-6">Community Discussions</h2>
+            
+            <div class="bg-green-50 rounded-xl p-6 mb-8">
+                <div class="mb-4">
+                    <input type="text" id="comment-author" placeholder="Your Name (e.g., Guest User)" class="w-full p-3 rounded-lg border border-gray-300 mb-3">
+                    <textarea id="comment-text" placeholder="Share your thoughts, ask a question, or share an idea... (Max 250 chars)" maxlength="250" rows="4" class="w-full p-3 rounded-lg border border-gray-300"></textarea>
+                </div>
+                <button id="post-comment-btn" class="bg-primary hover:bg-green-600 text-white font-bold py-2 px-6 rounded-lg transition">
+                    Post Comment
+                </button>
+            </div>
+            
+            <h3 class="text-xl font-semibold mb-4">Recent Posts</h3>
+            <div id="comment-thread" class="space-y-6">
+                <!-- Comments will be dynamically added here -->
+            </div>
+        </section>
+    </main>
+
+<!-- Footer -->
+    <footer class="footer-gradient text-white py-8 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="footer-content flex flex-col md:flex-row justify-between items-center">
+                <div class="footer-section p-4 flex items-center">
+                    <i class="fa-solid fa-leaf text-3xl md:text-4xl"></i>
+                    <span class="ml-2 text-2xl md:text-3xl font-bold">EcoConnect</span>
+                </div>
+                <div class="footer-section social flex mt-6 md:mt-0 md:ml-auto">
+                    <div class="follow p-5 rounded-full mx-2">
+                        <i class="fa-brands fa-instagram text-3xl md:text-4xl"></i>
+                    </div>
+                    <div class="follow p-5 rounded-full mx-2">
+                        <i class="fa-brands fa-twitter text-3xl md:text-4xl"></i>
+                    </div>
+                    <div class="follow p-5 rounded-full mx-2">
+                        <i class="fa-brands fa-facebook text-3xl md:text-4xl"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom text-center mt-8 pt-6 border-t border-white border-opacity-30">
+                <p>© 2025 All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Hamburger menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.getElementById('hamburger-menu');
+            const navMenu = document.querySelector('.first-box-mobile');
+            hamburger.addEventListener('click', function() {
+                navMenu.classList.toggle('hidden');
+                navMenu.classList.toggle('slide-down');
+            });
+            // Close menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                    navMenu.classList.add('hidden');
+                    navMenu.classList.remove('slide-down');
+                }
+            });
+            // Allow keyboard access
+            hamburger.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    navMenu.classList.toggle('hidden');
+                    navMenu.classList.toggle('slide-down');
+                }
+            });
+        });
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            // User data
+            let userPoints = localStorage.getItem('userPoints') ? parseInt(localStorage.getItem('userPoints')) : 0;
+            let earnedBadges = localStorage.getItem('earnedBadges') ? JSON.parse(localStorage.getItem('earnedBadges')) : [];
+            
+            // Game data
+            let gameActive = false;
+            let currentQuestion = 0;
+            let score = 0;
+            let treesPlanted = 0;
+            
+            // Events data
+            const eventsData = [
+                {
+                    id: 'event-1',
+                    image: '../Images/Community_Tree_Planting_Drive.jpg',
+                    title: 'Community Tree Planting Drive',
+                    date: 'August 10, 2025',
+                    location: 'Eco Park, Sector 24, Delhi',
+                    impact: 'Est. 500 trees planted, ~10 tons CO2 absorbed/year.'
+                },
+                {
+                    id: 'event-2',
+                    image: '../Images/Beach_Cleanup_Drive.jpg',
+                    title: 'Beach Cleanup Drive',
+                    date: 'August 25, 2025',
+                    location: 'Yamuna Riverbank, Okhla',
+                    impact: 'Target: 800 kg plastic/waste removal, protecting aquatic life.'
+                },
+                {
+                    id: 'event-3',
+                    image: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=1474',
+                    title: 'Home Composting Workshop',
+                    date: 'September 5, 2025',
+                    location: 'Community Hall, Green Valley',
+                    impact: 'Learn to divert 30% of household waste from landfills.'
+                }
+            ];
+
+            // Sample comments
+            const initialComments = [
+                {
+                    author: "Sarah L.",
+                    date: "July 20, 2025",
+                    content: "Just signed up for the 'Beach Cleanup Drive'! So excited to contribute. Has anyone done this before and have tips?",
+                    likes: 12,
+                    replies: 3
+                },
+                {
+                    author: "Mark T.",
+                    date: "July 18, 2025",
+                    content: "The 'Home Composting Workshop' was incredibly insightful! Highly recommend it to anyone looking to reduce food waste.",
+                    likes: 18,
+                    replies: 5
+                }
+            ];
+            
+            // DOM Elements
+            const userPointsEl = document.getElementById('user-points');
+            const levelProgressEl = document.getElementById('level-progress');
+            const levelTextEl = document.getElementById('level-text');
+            const badgesContainerEl = document.getElementById('badges-container');
+            const startGameBtn = document.getElementById('start-game-btn');
+            const gameAreaEl = document.getElementById('game-area');
+            const questionTextEl = document.getElementById('question-text');
+            const optionsContainerEl = document.getElementById('options-container');
+            const currentScoreEl = document.getElementById('current-score');
+            const treesPlantedEl = document.getElementById('trees-planted');
+            const resultsContainerEl = document.getElementById('results-container');
+            const finalTreesEl = document.getElementById('final-trees');
+            const finalPointsEl = document.getElementById('final-points');
+            const playAgainBtn = document.getElementById('play-again-btn');
+            const eventListEl = document.getElementById('event-list');
+            const postCommentBtn = document.getElementById('post-comment-btn');
+            const commentAuthorInput = document.getElementById('comment-author');
+            const commentTextInput = document.getElementById('comment-text');
+            const commentThreadEl = document.getElementById('comment-thread');
+            
+            // Badges data
+            const badges = [
+                { id: 'eco-learner', name: 'Eco Learner', icon: 'fa-graduation-cap', earned: false },
+                { id: 'tree-champion', name: 'Tree Champion', icon: 'fa-tree', earned: false },
+                { id: 'quiz-master', name: 'Quiz Master', icon: 'fa-trophy', earned: false },
+                { id: 'eco-scholar', name: 'Eco Scholar', icon: 'fa-book', earned: false }
+            ];
+            
+            // Quiz questions
+            const questions = [
+                {
+                    question: "Which of these materials takes the longest to decompose?",
+                    options: ["Plastic bottle", "Banana peel", "Paper bag", "Cotton shirt"],
+                    correctAnswer: 0
+                },
+                {
+                    question: "What is the primary cause of ocean acidification?",
+                    options: ["Plastic pollution", "Oil spills", "Excess carbon dioxide", "Industrial waste"],
+                    correctAnswer: 2
+                },
+                {
+                    question: "Which renewable energy source is the most widely used globally?",
+                    options: ["Solar", "Wind", "Hydroelectric", "Geothermal"],
+                    correctAnswer: 2
+                },
+                {
+                    question: "What percentage of the world's water is freshwater?",
+                    options: ["10%", "3%", "25%", "50%"],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Which of these actions has the greatest impact on reducing your carbon footprint?",
+                    options: ["Using LED bulbs", "Reducing meat consumption", "Recycling plastic", "Taking shorter showers"],
+                    correctAnswer: 1
+                }
+            ];
+            
+            // Initialize page
+            function initPage() {
+                updatePointsDisplay();
+                updateLevelProgress();
+                renderBadges();
+                renderEvents();
+                renderComments();
+                
+                // Update badge earned status
+                badges.forEach((badge, index) => {
+                    badge.earned = earnedBadges.includes(badge.id);
+                });
+            }
+            
+            // Render events
+            function renderEvents() {
+                eventListEl.innerHTML = '';
+                
+                eventsData.forEach(event => {
+                    const eventCard = document.createElement('div');
+                    eventCard.className = 'game-card bg-white rounded-xl shadow-md overflow-hidden';
+                    
+                    eventCard.innerHTML = `
+                        <img src="${event.image}" alt="${event.title}" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2">${event.title}</h3>
+                            <p class="text-gray-600 mb-1"><i class="fa-regular fa-calendar mr-2"></i>${event.date}</p>
+                            <p class="text-gray-600 mb-3"><i class="fa-solid fa-location-dot mr-2"></i>${event.location}</p>
+                            <p class="text-sm bg-green-50 p-3 rounded-lg mb-4"><i class="fa-solid fa-seedling mr-2"></i>${event.impact}</p>
+                            <button class="w-full bg-primary hover:bg-green-600 text-white py-2 rounded-lg transition join-button" data-event-id="${event.id}">
+                                Join Event
+                            </button>
+                        </div>
+                    `;
+                    
+                    eventListEl.appendChild(eventCard);
+                });
+            }
+            
+            // Render comments
+            function renderComments() {
+                commentThreadEl.innerHTML = '';
+                
+                initialComments.forEach(comment => {
+                    const commentEl = document.createElement('div');
+                    commentEl.className = 'comment-enter bg-gray-50 rounded-xl p-5 border border-gray-100';
+                    
+                    commentEl.innerHTML = `
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <strong class="text-primary">${comment.author}</strong>
+                                <span class="text-gray-500 text-sm ml-2">${comment.date}</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 mb-4">${comment.content}</p>
+                        <div class="flex space-x-4">
+                            <span class="action-btn like-btn text-gray-600 hover:text-primary cursor-pointer">
+                                <i class="fa-regular fa-thumbs-up mr-1"></i> ${comment.likes}
+                            </span>
+                            <span class="action-btn reply-btn text-gray-600 hover:text-primary cursor-pointer">
+                                <i class="fa-regular fa-comment mr-1"></i> ${comment.replies} replies
+                            </span>
+                        </div>
+                    `;
+                    
+                    commentThreadEl.appendChild(commentEl);
+                });
+            }
+            
+            // Update points display
+            function updatePointsDisplay() {
+                userPointsEl.textContent = userPoints;
+            }
+            
+            // Update level progress
+            function updateLevelProgress() {
+                const level = Math.floor(userPoints / 500) + 1;
+                const progress = (userPoints % 500) / 5;
+                
+                levelTextEl.textContent = `Level ${level}: ${getLevelName(level)}`;
+                levelProgressEl.style.width = `${progress}%`;
+            }
+            
+            // Get level name based on level number
+            function getLevelName(level) {
+                const names = ["Eco Novice", "Green Explorer", "Nature Guardian", "Eco Warrior", "Planet Hero"];
+                return names[level - 1] || "Eco Legend";
+            }
+            
+            // Render badges
+            function renderBadges() {
+                badgesContainerEl.innerHTML = '';
+                
+                badges.forEach(badge => {
+                    const badgeEl = document.createElement('div');
+                    badgeEl.className = `flex flex-col items-center p-4 rounded-lg ${badge.earned ? 'bg-green-100 border border-primary' : 'bg-gray-100 opacity-50'}`;
+                    
+                    badgeEl.innerHTML = `
+                        <div class="w-16 h-16 rounded-full ${badge.earned ? 'bg-primary' : 'bg-gray-300'} flex items-center justify-center mb-2">
+                            <i class="fa-solid ${badge.icon} text-white text-2xl"></i>
+                        </div>
+                        <span class="text-sm font-semibold text-center">${badge.name}</span>
+                        ${badge.earned ? '<span class="text-xs text-green-600 mt-1">Earned!</span>' : '<span class="text-xs text-gray-500 mt-1">Locked</span>'}
+                    `;
+                    
+                    badgesContainerEl.appendChild(badgeEl);
+                });
+            }
+            
+            // Start the game
+            function startGame() {
+                gameActive = true;
+                currentQuestion = 0;
+                score = 0;
+                treesPlanted = 0;
+                
+                startGameBtn.parentElement.classList.add('hidden');
+                gameAreaEl.classList.remove('hidden');
+                resultsContainerEl.classList.add('hidden');
+                
+                updateGameStats();
+                showQuestion();
+            }
+            
+            // Show current question
+            function showQuestion() {
+                const question = questions[currentQuestion];
+                questionTextEl.textContent = question.question;
+                optionsContainerEl.innerHTML = '';
+                
+                question.options.forEach((option, index) => {
+                    const optionEl = document.createElement('button');
+                    optionEl.className = 'w-full text-left bg-white hover:bg-gray-100 py-3 px-4 rounded-lg shadow transition';
+                    optionEl.textContent = option;
+                    optionEl.addEventListener('click', () => checkAnswer(index));
+                    optionsContainerEl.appendChild(optionEl);
+                });
+            }
+            
+            // Check if answer is correct
+            function checkAnswer(selectedIndex) {
+                const question = questions[currentQuestion];
+                const options = optionsContainerEl.querySelectorAll('button');
+                
+                // Disable all buttons
+                options.forEach(btn => {
+                    btn.disabled = true;
+                });
+                
+                // Mark correct and incorrect answers
+                if (selectedIndex === question.correctAnswer) {
+                    options[selectedIndex].classList.add('bg-green-100', 'border', 'border-green-500');
+                    score++;
+                    treesPlanted++;
+                } else {
+                    options[selectedIndex].classList.add('bg-red-100', 'border', 'border-red-500');
+                    options[question.correctAnswer].classList.add('bg-green-100', 'border', 'border-green-500');
+                }
+                
+                // Move to next question after delay
+                setTimeout(() => {
+                    currentQuestion++;
+                    
+                    if (currentQuestion < questions.length) {
+                        showQuestion();
+                    } else {
+                        endGame();
+                    }
+                    
+                    updateGameStats();
+                }, 1500);
+            }
+            
+            // Update game stats display
+            function updateGameStats() {
+                currentScoreEl.textContent = `Score: ${score}/${questions.length}`;
+                treesPlantedEl.textContent = `Trees: ${treesPlanted}`;
+            }
+            
+            // End the game
+            function endGame() {
+                gameActive = false;
+                
+                // Calculate points earned
+                const pointsEarned = score * 50;
+                userPoints += pointsEarned;
+                
+                // Save to localStorage
+                localStorage.setItem('userPoints', userPoints);
+                
+                // Check for badge earning
+                if (score === questions.length && !earnedBadges.includes('quiz-master')) {
+                    earnedBadges.push('quiz-master');
+                    localStorage.setItem('earnedBadges', JSON.stringify(earnedBadges));
+                    
+                    // Show badge animation
+                    const badgeNotification = document.createElement('div');
+                    badgeNotification.className = 'fixed top-4 right-4 bg-white rounded-lg shadow-lg p-4 border-l-4 border-secondary z-50 badge-animation';
+                    badgeNotification.innerHTML = `
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center mr-3">
+                                <i class="fa-solid fa-trophy text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">New Badge Earned!</h4>
+                                <p>You unlocked the <span class="font-semibold">Quiz Master</span> badge</p>
+                            </div>
+                        </div>
+                    `;
+                    document.body.appendChild(badgeNotification);
+                    
+                    // Remove notification after delay
+                    setTimeout(() => {
+                        badgeNotification.remove();
+                        renderBadges();
+                    }, 3000);
+                }
+                
+                // Update UI
+                updatePointsDisplay();
+                updateLevelProgress();
+                renderBadges();
+                
+                // Show results
+                finalTreesEl.textContent = treesPlanted;
+                finalPointsEl.textContent = pointsEarned;
+                resultsContainerEl.classList.remove('hidden');
+            }
+            
+            // Event listeners
+            startGameBtn.addEventListener('click', startGame);
+            playAgainBtn.addEventListener('click', startGame);
+            
+            // Join event button
+            eventListEl.addEventListener('click', (e) => {
+                if (e.target.classList.contains('join-button')) {
+                    const button = e.target;
+                    const eventId = button.dataset.eventId;
+                    
+                    if (!button.classList.contains('joined')) {
+                        button.textContent = 'Joined!';
+                        button.classList.add('joined');
+                        button.classList.add('bg-gray-400', 'hover:bg-gray-400');
+                        button.classList.remove('bg-primary', 'hover:bg-green-600');
+                        
+                        // Award points for joining
+                        userPoints += 100;
+                        updatePointsDisplay();
+                        updateLevelProgress();
+                        
+                        // Save to localStorage
+                        localStorage.setItem('userPoints', userPoints);
+                        
+                        alert(`You have joined the event! 100 points awarded.`);
+                    }
+                }
+            });
+            
+            // Post comment
+            postCommentBtn.addEventListener('click', () => {
+                const author = commentAuthorInput.value.trim() || 'Anonymous';
+                const commentText = commentTextInput.value.trim();
+                
+                if (!commentText) {
+                    alert('Please write a comment before posting.');
+                    return;
+                }
+                
+                const now = new Date();
+                const dateString = now.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+                
+                const commentEl = document.createElement('div');
+                commentEl.className = 'comment-enter bg-gray-50 rounded-xl p-5 border border-gray-100';
+                
+                commentEl.innerHTML = `
+                    <div class="flex justify-between items-start mb-3">
+                        <div>
+                            <strong class="text-primary">${author}</strong>
+                            <span class="text-gray-500 text-sm ml-2">${dateString}</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-4">${commentText}</p>
+                    <div class="flex space-x-4">
+                        <span class="action-btn like-btn text-gray-600 hover:text-primary cursor-pointer">
+                            <i class="fa-regular fa-thumbs-up mr-1"></i> 0
+                        </span>
+                        <span class="action-btn reply-btn text-gray-600 hover:text-primary cursor-pointer">
+                            <i class="fa-regular fa-comment mr-1"></i> 0 replies
+                        </span>
+                    </div>
+                `;
+                
+                commentThreadEl.prepend(commentEl);
+                
+                // Clear input fields
+                commentAuthorInput.value = '';
+                commentTextInput.value = '';
+                
+                // Award points for commenting
+                userPoints += 20;
+                updatePointsDisplay();
+                updateLevelProgress();
+                
+                // Save to localStorage
+                localStorage.setItem('userPoints', userPoints);
+            });
+            
+            // Like and reply functionality
+            commentThreadEl.addEventListener('click', (e) => {
+                if (e.target.classList.contains('like-btn') || e.target.closest('.like-btn')) {
+                    const likeBtn = e.target.closest('.like-btn');
+                    const likeCount = likeBtn.querySelector('i').nextSibling;
+                    let count = parseInt(likeCount.textContent);
+                    likeCount.textContent = count + 1;
+                }
+                else if (e.target.classList.contains('reply-btn') || e.target.closest('.reply-btn')) {
+                    alert('Reply functionality would be implemented with a backend system in a real application.');
+                }
+            });
+            
+            // Initialize the page
+            initPage();
+        });
+    </script>
+</body>
+</html>

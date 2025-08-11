@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco-Ride Planner | EcoConnect</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2A7B9B',
+                        secondary: '#4CAF50',
+                        accent: '#FFC107',
+                        dark: '#2C3E50',
+                        light: '#F0F4F8',
+                    },
+                    animation: {
+                        'slide-down': 'slideDown 0.3s ease-out forwards',
+                    },
+                    keyframes: {
+                        slideDown: {
+                            '0%': { opacity: 0, transform: 'translateY(-20px)' },
+                            '100%': { opacity: 1, transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .navbar-gradient {
+                background: linear-gradient(90deg, rgba(42, 123, 155, 1) 0%, rgba(62, 157, 145, 1) 22%, rgba(72, 173, 140, 1) 33%, rgba(87, 199, 133, 1) 50%, rgba(237, 221, 83, 1) 100%);
+            }
+            .hero-gradient {
+                background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
+            }
+            .features-gradient {
+                background: linear-gradient(to right, #FFFFFF, #6DD5FA, #2980B9);
+            }
+            .footer-gradient {
+                background: linear-gradient(to right, #4CA1AF, #2C3E50);
+            }
+            .nav-link-hover:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+            .feature-card-hover:hover {
+                background-color: #006666;
+            }
+            .carbon-footprint {
+                @apply text-green-700 font-bold;
+            }
+            .suggestion-list li::before {
+                content: '•';
+                @apply text-green-600 font-bold mr-2;
+            }
+            .travel-option-card {
+                @apply bg-white rounded-xl shadow-md p-6 flex flex-col space-y-3;
+            }
+            .loading-spinner {
+                @apply w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased bg-gray-50">
+    <!-- Header/Navigation -->
+    <header>
+        <div class="navbar-gradient fixed w-full h-20 flex justify-center items-center px-5 py-5 text-white z-50">
+            <div class="flex justify-between items-center w-full max-w-7xl">
+                <!-- Logo -->
+                <a href="./index.html">
+                <div class="flex items-center">
+                    <i class="fa-solid fa-leaf text-3xl md:text-4xl"></i>
+                    <span class="ml-2 text-2xl md:text-3xl font-bold">EcoConnect</span>
+                </div>
+                </a>
+
+                <!-- Hamburger menu button -->
+                <div class="hamburger flex flex-col cursor-pointer w-8 h-8 justify-center items-center ml-2 md:hidden" id="hamburger-menu" aria-label="Open navigation" tabindex="0">
+                    <span class="h-1 w-7 bg-white my-0.5 rounded"></span>
+                    <span class="h-1 w-7 bg-white my-0.5 rounded"></span>
+                    <span class="h-1 w-7 bg-white my-0.5 rounded"></span>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="first-box hidden md:flex justify-evenly items-center flex-1 mx-4">
+                     <div class="nav-link-hover p-3 rounded">
+                        <a href="./Community_Forum.html" class="flex items-center text-white no-underline">
+                            <i class="fa-solid fa-people-group text-xl md:text-2xl"></i>
+                            <span class="ml-2 text-base md:text-xl">Community Forum</span>
+                        </a>
+                    </div>
+                    
+                    <div class="nav-link-hover p-3 rounded">
+                        <a href="./Eco_Ride.html" class="flex items-center text-white no-underline">
+                            <i class="fa-solid fa-car-side text-xl md:text-2xl"></i>
+                            <span class="ml-2 text-base md:text-xl">Eco-Ride</span>
+                        </a>
+                    </div>
+                    
+                    <div class="nav-link-hover p-3 rounded">
+                        <a href="./Shopping_Assistant.html" class="flex items-center text-white no-underline">
+                            <i class="fa-solid fa-cart-shopping text-xl md:text-2xl"></i>
+                            <span class="ml-2 text-base md:text-xl">Shopping Assistant</span>
+                        </a>
+                    </div>
+                    
+                    <div class="nav-link-hover p-3 rounded">
+                        <a href="./Education.html" class="flex items-center text-white no-underline">
+                            <i class="fa-solid fa-book text-xl md:text-2xl"></i>
+                            <span class="ml-2 text-base md:text-xl">Education</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Profile Link -->
+                <div class="nav-link-hover p-3 rounded">
+                    <a href="./Profile.html" class="flex items-center text-white no-underline">
+                        <i class="fa-solid fa-user text-xl md:text-2xl"></i>
+                        <span class="ml-2 text-base md:text-xl">Profile</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Mobile Navigation -->
+        <div class="first-box-mobile hidden absolute top-20 left-0 w-full bg-white shadow-lg z-40 md:hidden">
+            <div class="flex flex-col py-2">
+                <a href="./index.html" class="flex items-center p-4 text-gray-800 hover:bg-gray-100">
+                    <i class="fa-solid fa-house text-xl mr-3"></i>
+                    <span class="text-lg">Home</span>
+                </a>
+                <a href="./Community_Forum.html" class="flex items-center p-4 text-gray-800 hover:bg-gray-100">
+                    <i class="fa-solid fa-people-group text-xl mr-3"></i>
+                    <span class="text-lg">Community Forum</span>
+                </a>
+                <a href="./Eco-Ride.html" class="flex items-center p-4 text-gray-800 hover:bg-gray-100">
+                    <i class="fa-solid fa-car-side text-xl mr-3"></i>
+                    <span class="text-lg font-bold">Eco-Ride</span>
+                </a>
+                <a href="./Shopping_Assistant.html" class="flex items-center p-4 text-gray-800 hover:bg-gray-100">
+                    <i class="fa-solid fa-cart-shopping text-xl mr-3"></i>
+                    <span class="text-lg">Shopping Assistant</span>
+                </a>
+                <a href="./Education.html" class="flex items-center p-4 text-gray-800 hover:bg-gray-100">
+                    <i class="fa-solid fa-book text-xl mr-3"></i>
+                    <span class="text-lg">Education</span>
+                </a>
+                <a href="./Profile.html" class="flex items-center p-4 text-gray-800 hover:bg-gray-100">
+                    <i class="fa-solid fa-user text-xl mr-3"></i>
+                    <span class="text-lg">Profile</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-24 pb-16 px-4">
+        <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-6 md:p-8">
+            <h1 class="text-3xl md:text-4xl font-extrabold text-center text-gray-800 mb-4">
+                Eco Commute Planner
+            </h1>
+            <p class="text-center text-lg text-gray-600 mb-8">
+                Plan your journey, minimize your carbon footprint with real-time data
+            </p>
+
+            <!-- Journey Input Form -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div>
+                    <label for="origin" class="block text-sm font-medium text-gray-700 mb-2">Departure Location:</label>
+                    <input type="text" id="origin" placeholder="e.g., New York City" 
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <div>
+                    <label for="destination" class="block text-sm font-medium text-gray-700 mb-2">Arrival Location:</label>
+                    <input type="text" id="destination" placeholder="e.g., Los Angeles" 
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                </div>
+            </div>
+
+            <div class="text-center mb-10">
+                <button id="calculateBtn" class="px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg transition duration-300 transform hover:scale-105">
+                    Calculate My Eco-Route
+                </button>
+            </div>
+
+            <!-- Loading Indicator -->
+            <div id="loadingIndicator" class="hidden flex flex-col items-center justify-center py-8">
+                <div class="loading-spinner mb-4"></div>
+                <p class="text-gray-600">Calculating your eco-route...</p>
+            </div>
+
+            <!-- Results Section -->
+            <div id="results" class="hidden">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6 text-center">Your Eco-Friendly Options</h2>
+
+                <!-- Message Box for alerts -->
+                <div id="messageBox" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative mb-6" role="alert">
+                    <strong class="font-bold">Error!</strong>
+                    <span class="block sm:inline" id="messageText"></span>
+                </div>
+
+                <div id="optionsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                    <!-- Travel option cards will be inserted here by JavaScript -->
+                </div>
+
+                <!-- Greener Travel Tips -->
+                <div class="bg-blue-50 p-6 rounded-xl shadow-md">
+                    <h3 class="text-xl md:text-2xl font-bold text-blue-800 mb-4">Go Even Greener!</h3>
+                    <p class="text-blue-700 mb-4">
+                        Every journey is an opportunity to reduce your environmental impact. Here are some tips:
+                    </p>
+                    <ul class="list-disc pl-5 text-blue-700 space-y-2">
+                        <li>For short distances, consider walking or cycling - it's healthy and produces zero emissions!</li>
+                        <li>If driving, carpool with others to share the carbon burden.</li>
+                        <li>Opt for public transport whenever possible.</li>
+                        <li>When flying, choose direct flights and fly economy class.</li>
+                        <li>Consider offsetting your unavoidable emissions through certified programs.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-gradient text-white py-8 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="footer-content flex flex-col md:flex-row justify-between items-center">
+                <div class="footer-section p-4 ">
+                    <div class="flex items-center">
+                    <i class="fa-solid fa-leaf text-3xl md:text-4xl"></i>
+                    <span class="ml-2 text-2xl md:text-3xl font-bold">EcoConnect</span>
+                </div> 
+                </div>
+
+                <div class="footer-section social flex mt-6 md:mt-0">
+                    <div class="follow p-5 rounded-full mx-2">
+                        <i class="fa-brands fa-instagram text-3xl md:text-4xl"></i>
+                    </div>
+                    <div class="follow p-5 rounded-full mx-2">
+                        <i class="fa-brands fa-twitter text-3xl md:text-4xl"></i>
+                    </div>
+                    <div class="follow p-5 rounded-full mx-2">
+                        <i class="fa-brands fa-facebook text-3xl md:text-4xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom text-center mt-8 pt-6 border-t border-white border-opacity-30">
+                <p>© 2025 All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // API Keys (In a real application, these should be secured on the backend)
+        const OPENROUTE_API_KEY = '5b3ce3597851110001cf6248f8e45d9e3d6d4b1e8d9b9f4f8d9c9f4e';
+        const CLIMATIQ_API_KEY = 'YOUR_CLIMATIQ_API_KEY'; // Replace with your Climatiq API key
+
+        // DOM Elements
+        const calculateBtn = document.getElementById('calculateBtn');
+        const originInput = document.getElementById('origin');
+        const destinationInput = document.getElementById('destination');
+        const resultsSection = document.getElementById('results');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const messageBox = document.getElementById('messageBox');
+        const messageText = document.getElementById('messageText');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+
+        // Function to display a message in the message box
+        function showMessage(message, type = 'error') {
+            messageText.textContent = message;
+            messageBox.classList.remove('hidden');
+            if (type === 'error') {
+                messageBox.classList.remove('bg-green-100', 'border-green-400', 'text-green-700');
+                messageBox.classList.add('bg-red-100', 'border-red-400', 'text-red-700');
+            } else {
+                messageBox.classList.remove('bg-red-100', 'border-red-400', 'text-green-700');
+                messageBox.classList.add('bg-green-100', 'border-green-400', 'text-green-700');
+            }
+        }
+
+        // Function to hide the message box
+        function hideMessageBox() {
+            messageBox.classList.add('hidden');
+        }
+
+        // Function to get coordinates from OpenRouteService Geocoding API
+        async function getCoordinates(location) {
+            const url = `https://api.openrouteservice.org/geocode/search?api_key=${OPENROUTE_API_KEY}&text=${encodeURIComponent(location)}`;
+            
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`Geocoding API error: ${response.status}`);
+                }
+                const data = await response.json();
+                
+                if (data.features && data.features.length > 0) {
+                    return data.features[0].geometry.coordinates; // [longitude, latitude]
+                } else {
+                    throw new Error('No results found for this location');
+                }
+            } catch (error) {
+                console.error('Geocoding error:', error);
+                showMessage(`Location error: ${error.message}`);
+                return null;
+            }
+        }
+
+        // Function to get route distance from OpenRouteService Directions API
+        async function getRouteDistance(originCoords, destinationCoords, profile = 'driving-car') {
+            const url = `https://api.openrouteservice.org/v2/directions/${profile}`;
+            const body = {
+                coordinates: [originCoords, destinationCoords],
+                instructions: false,
+                elevation: false,
+                preference: 'recommended',
+                units: 'km'
+            };
+            
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': OPENROUTE_API_KEY,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(body)
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`Routing API error: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                return data.routes[0].summary.distance; // Distance in meters
+            } catch (error) {
+                console.error('Routing error:', error);
+                showMessage(`Routing error: ${error.message}`);
+                return null;
+            }
+        }
+
+        // Function to calculate carbon emissions using Climatiq API
+        async function calculateCarbonEmissions(distanceKm, mode) {
+            // For walking and cycling, emissions are zero
+            if (mode === 'walk' || mode === 'bicycle') return 0;
+            
+            // Mode mapping to Climatiq identifiers
+            const modeMap = {
+                'car': 'passenger_vehicle-vehicle_type_car-fuel_source_na-engine_size_na-vehicle_age_na-vehicle_weight_na',
+                'bus': 'bus',
+                'train': 'train',
+                'airplane': 'plane'
+            };
+            
+            const climatiqMode = modeMap[mode];
+            if (!climatiqMode) return null;
+            
+            const url = 'https://beta3.api.climatiq.io/travel';
+            const body = {
+                distance: {
+                    unit: 'km',
+                    value: distanceKm
+                },
+                mode: climatiqMode
+            };
+            
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${CLIMATIQ_API_KEY}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(body)
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`Carbon API error: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                return data.co2e; // CO2 equivalent in kg
+            } catch (error) {
+                console.error('Carbon calculation error:', error);
+                showMessage(`Carbon calculation error: ${error.message}`);
+                return null;
+            }
+        }
+
+        // Function to convert meters to kilometers
+        function metersToKm(meters) {
+            return (meters / 1000).toFixed(1);
+        }
+
+        // Function to display travel options
+        function displayTravelOptions(options) {
+            // Clear previous results
+            optionsContainer.innerHTML = '';
+            
+            // Create cards for each travel option
+            options.forEach(option => {
+                const card = document.createElement('div');
+                card.className = 'travel-option-card';
+                card.innerHTML = `
+                    <div class="flex items-center space-x-3 mb-2">
+                        <span class="text-3xl">${option.icon}</span>
+                        <h3 class="text-xl font-semibold text-gray-700">${option.mode}</h3>
+                    </div>
+                    <p class="text-gray-600">
+                        Distance: <span class="font-medium">${option.distance} km</span>
+                    </p>
+                    <p class="text-gray-600">
+                        Carbon Footprint: <span class="carbon-footprint">${option.carbon} kg CO2e</span>
+                    </p>
+                    <div>
+                        <h4 class="font-medium text-gray-700 mb-2">How to reduce carbon:</h4>
+                        <ul class="suggestion-list text-sm">
+                            ${option.reduceTips.map(tip => `<li>${tip}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-medium text-gray-700 mb-2">Eco-friendly suggestions:</h4>
+                        <ul class="suggestion-list text-sm">
+                            ${option.ticketSuggestions.map(suggestion => `<li>${suggestion}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <button class="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition duration-200 ease-in-out transform hover:scale-105" onclick="alert('This would link to a real booking site for ${option.mode}!')">
+                        Explore Options
+                    </button>
+                `;
+                optionsContainer.appendChild(card);
+            });
+        }
+
+        // Main function to handle travel calculation
+        calculateBtn.addEventListener('click', async () => {
+            hideMessageBox(); // Hide any previous messages
+            
+            const origin = originInput.value.trim();
+            const destination = destinationInput.value.trim();
+            
+            if (!origin || !destination) {
+                showMessage('Please enter both departure and arrival locations for your journey.');
+                return;
+            }
+            
+            // Show loading indicator
+            loadingIndicator.classList.remove('hidden');
+            resultsSection.classList.add('hidden');
+            
+            try {
+                // Get coordinates for both locations
+                const originCoords = await getCoordinates(origin);
+                const destinationCoords = await getCoordinates(destination);
+                
+                if (!originCoords || !destinationCoords) {
+                    throw new Error('Could not get coordinates for locations');
+                }
+                
+                // Calculate distances for different travel modes
+                const drivingDistanceM = await getRouteDistance(originCoords, destinationCoords, 'driving-car');
+                const cyclingDistanceM = await getRouteDistance(originCoords, destinationCoords, 'cycling-regular');
+                const walkingDistanceM = await getRouteDistance(originCoords, destinationCoords, 'foot-walking');
+                
+                // Convert to kilometers
+                const drivingDistanceKm = metersToKm(drivingDistanceM);
+                const cyclingDistanceKm = metersToKm(cyclingDistanceM);
+                const walkingDistanceKm = metersToKm(walkingDistanceM);
+                
+                // Calculate carbon emissions for each mode
+                const drivingCarbon = await calculateCarbonEmissions(drivingDistanceKm, 'car');
+                const busCarbon = await calculateCarbonEmissions(drivingDistanceKm, 'bus');
+                const trainCarbon = await calculateCarbonEmissions(drivingDistanceKm, 'train');
+                const airplaneCarbon = await calculateCarbonEmissions(drivingDistanceKm, 'airplane');
+                const cyclingCarbon = 0; // Zero emissions
+                const walkingCarbon = 0; // Zero emissions
+                
+                // Define travel options with their specific advice
+                const travelOptions = [
+                    {
+                        mode: 'Bus',
+                        icon: '🚌',
+                        distance: drivingDistanceKm,
+                        carbon: busCarbon.toFixed(1),
+                        reduceTips: [
+                            'Choose public transport over private vehicles.',
+                            'Look for bus operators using electric or hybrid fleets.',
+                            'Consider overnight buses for longer journeys to save on accommodation.'
+                        ],
+                        ticketSuggestions: [
+                            'Check for multi-day passes if you plan multiple trips.',
+                            'Book in advance for potentially cheaper options.',
+                            'Look for direct routes to avoid unnecessary transfers.'
+                        ]
+                    },
+                    {
+                        mode: 'Train',
+                        icon: '🚆',
+                        distance: drivingDistanceKm,
+                        carbon: trainCarbon.toFixed(1),
+                        reduceTips: [
+                            'Trains are one of the greenest motorized options.',
+                            'Opt for direct routes to minimize energy consumption.',
+                            'Choose standard class over first class for lower per-person emissions.'
+                        ],
+                        ticketSuggestions: [
+                            'Explore rail passes for extensive travel.',
+                            'Book off-peak tickets for better prices.',
+                            'Consider sleeper trains for long distances.'
+                        ]
+                    },
+                    {
+                        mode: 'Car',
+                        icon: '🚗',
+                        distance: drivingDistanceKm,
+                        carbon: drivingCarbon.toFixed(1),
+                        reduceTips: [
+                            'Carpool to share the carbon burden.',
+                            'Consider renting an electric vehicle (EV).',
+                            'Drive efficiently: avoid harsh acceleration/braking.'
+                        ],
+                        ticketSuggestions: [
+                            'Use ride-sharing apps that offer carpooling.',
+                            'Look for car rental companies with EV options.',
+                            'Plan your route to avoid traffic and reduce idling.'
+                        ]
+                    },
+                    {
+                        mode: 'Airplane',
+                        icon: '✈️',
+                        distance: drivingDistanceKm,
+                        carbon: airplaneCarbon.toFixed(1),
+                        reduceTips: [
+                            'Fly direct whenever possible.',
+                            'Choose economy class for lower per-person emissions.',
+                            'Consider offsetting your flight\'s emissions.',
+                            'Pack light to reduce aircraft weight.'
+                        ],
+                        ticketSuggestions: [
+                            'Prioritize direct flights.',
+                            'Look for airlines with sustainability programs.',
+                            'Book well in advance for better options.'
+                        ]
+                    },
+                    {
+                        mode: 'Bicycle',
+                        icon: '🚲',
+                        distance: cyclingDistanceKm,
+                        carbon: cyclingCarbon.toFixed(1),
+                        reduceTips: [
+                            'The ultimate zero-carbon option for medium distances.',
+                            'Consider electric bikes for longer routes.',
+                            'Many cities offer bike-sharing programs.'
+                        ],
+                        ticketSuggestions: [
+                            'Look for bike rental services at your destination.',
+                            'Plan your route using bike-friendly paths.',
+                            'Check if public transport allows bikes for multi-modal trips.'
+                        ]
+                    },
+                    {
+                        mode: 'Walk',
+                        icon: '🚶',
+                        distance: walkingDistanceKm,
+                        carbon: walkingCarbon.toFixed(1),
+                        reduceTips: [
+                            'Zero emissions and great for your health!',
+                            'Combine walking with public transport.',
+                            'Explore local areas on foot to discover hidden gems.'
+                        ],
+                        ticketSuggestions: [
+                            'No tickets needed - just comfortable shoes!',
+                            'Use navigation apps for pedestrian-friendly routes.',
+                            'Plan shorter segments if the distance is long.'
+                        ]
+                    }
+                ];
+                
+                // Display results
+                displayTravelOptions(travelOptions);
+                resultsSection.classList.remove('hidden');
+                
+            } catch (error) {
+                console.error('Error in calculation:', error);
+                showMessage(`Error: ${error.message || 'Could not calculate your eco-route'}`);
+            } finally {
+                // Hide loading indicator
+                loadingIndicator.classList.add('hidden');
+            }
+        });
+
+        // Hamburger menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.getElementById('hamburger-menu');
+            const navMenu = document.querySelector('.first-box-mobile');
+            
+            hamburger.addEventListener('click', function() {
+                navMenu.classList.toggle('hidden');
+                navMenu.classList.toggle('slide-down');
+            });
+            
+            // Close menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                    navMenu.classList.add('hidden');
+                    navMenu.classList.remove('slide-down');
+                }
+            });
+            
+            // Allow keyboard access
+            hamburger.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    navMenu.classList.toggle('hidden');
+                    navMenu.classList.toggle('slide-down');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

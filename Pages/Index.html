@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoConnect Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        'slide-down': 'slideDown 0.3s ease-out forwards',
+                    },
+                    keyframes: {
+                        slideDown: {
+                            '0%': { opacity: 0, transform: 'translateY(-20px)' },
+                            '100%': { opacity: 1, transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .navbar-gradient {
+                background: linear-gradient(90deg, rgba(42, 123, 155, 1) 0%, rgba(62, 157, 145, 1) 22%, rgba(72, 173, 140, 1) 33%, rgba(87, 199, 133, 1) 50%, rgba(237, 221, 83, 1) 100%);
+            }
+            
+            .hero-gradient {
+                background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
+            }
+            
+            .features-gradient {
+                background: linear-gradient(to right, #FFFFFF, #6DD5FA, #2980B9);
+            }
+            
+            .footer-gradient {
+                background: linear-gradient(to right, #4CA1AF, #2C3E50);
+            }
+            
+            .hero-button-gradient {
+                background: radial-gradient(circle, rgba(174, 203, 238, 1) 72%, rgba(148, 187, 233, 1) 100%);
+            }
+            
+            .nav-link-hover:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+            
+            .feature-card-hover:hover {
+                background-color: #006666;
+            }
+            
+            .link-hover:hover {
+                text-decoration: underline;
+            }
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Header/Navigation -->
+    <header>
+        <div class="navbar-gradient fixed w-full h-20 flex justify-center items-center px-5 py-5 text-white z-50">
+            <div class="flex justify-between items-center w-full max-w-7xl">
+                <!-- Logo -->
+                <a href="./index.html">
+                <div class="flex items-center">
+                    <i class="fa-solid fa-leaf text-3xl md:text-4xl"></i>
+                    <span class="ml-2 text-2xl md:text-3xl font-bold">EcoConnect</span>
+                </div>
+                </a>
+
+                <!-- Hamburger menu button -->
+                <div class="hamburger flex flex-col cursor-pointer w-8 h-8 justify-center items-center ml-2 md:hidden" id="hamburger-menu" aria-label="Open navigation" tabindex="0">
+                    <span class="h-1 w-7 bg-white my-0.5 rounded"></span>
+                    <span class="h-1 w-7 bg-white my-0.5 rounded"></span>
+                    <span class="h-1 w-7 bg-white my-0.5 rounded"></span>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="first-box hidden md:flex justify-evenly items-center flex-1 mx-4">
+                     <div class="nav-link-hover p-3 rounded">
+                        <a href="./Community_Forum.html" class="flex items-center text-white no-underline">
+                            <i class="fa-solid fa-people-group text-xl md:text-2xl"></i>
+                            <span class="ml-2 text-base md:text-xl">Community Forum</span>
+                        </a>
+                    </div>
+                    
+                    <div class="nav-link-hover p-3 rounded">
+                        <a href="./Eco_Ride.html" class="flex items-center text-white no-underline">
+                            <i class="fa-solid fa-car-side text-xl md:text-2xl"></i>
+                            <span class="ml-2 text-base md:text-xl">Eco-Ride</span>
+                        </a>
+                    </div>
+                    
+                    <div class="nav-link-hover p-3 rounded">
+                        <a href="./Shopping_Assistant.html" class="flex items-center text-white no-underline">
+                            <i class="fa-solid fa-cart-shopping text-xl md:text-2xl"></i>
+                            <span class="ml-2 text-base md:text-xl">Shopping Assistant</span>
+                        </a>
+                    </div>
+                    
+                    <div class="nav-link-hover p-3 rounded">
+                        <a href="./Education.html" class="flex items-center text-white no-underline">
+                            <i class="fa-solid fa-book text-xl md:text-2xl"></i>
+                            <span class="ml-2 text-base md:text-xl">Education</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Profile Link -->
+                <div class="nav-link-hover p-3 rounded">
+                    <a href="./Profile.html" class="flex items-center text-white no-underline">
+                        <i class="fa-solid fa-user text-xl md:text-2xl"></i>
+                        <span class="ml-2 text-base md:text-xl">Profile</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <div class="first-box-mobile hidden absolute top-20 left-0 w-full bg-white shadow-lg z-40 md:hidden">
+            <div class="flex flex-col py-2">
+                <a href="./index.html" class="flex items-center p-4 text-gray-800 hover:bg-gray-100">
+                    <i class="fa-solid fa-house text-xl mr-3"></i>
+                    <span class="text-lg">Home</span>
+                </a>
+                <a href="./Community_Forum.html" class="flex items-center p-4 text-gray-800 hover:bg-gray-100">
+                    <i class="fa-solid fa-people-group text-xl mr-3"></i>
+                    <span class="text-lg">Community Forum</span>
+                </a>
+                <a href="./Eco-Ride.html" class="flex items-center p-4 text-gray-800 hover:bg-gray-100">
+                    <i class="fa-solid fa-car-side text-xl mr-3"></i>
+                    <span class="text-lg">Eco-Ride</span>
+                </a>
+                <a href="./Shopping_Assistant.html" class="flex items-center p-4 text-gray-800 hover:bg-gray-100">
+                    <i class="fa-solid fa-cart-shopping text-xl mr-3"></i>
+                    <span class="text-lg">Shopping Assistant</span>
+                </a>
+                <a href="./Education.html" class="flex items-center p-4 text-gray-800 hover:bg-gray-100">
+                    <i class="fa-solid fa-book text-xl mr-3"></i>
+                    <span class="text-lg">Education</span>
+                </a>
+                <a href="./Profile.html" class="flex items-center p-4 text-gray-800 hover:bg-gray-100">
+                    <i class="fa-solid fa-user text-xl mr-3"></i>
+                    <span class="text-lg">Profile</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-20">
+        <!-- Hero Section -->
+        <div class="hero-gradient flex justify-center items-center text-center min-h-[60vh]">
+            <div class="hero-content flex flex-col items-center px-4 py-10 max-w-4xl">
+                <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mt-10 mb-6">"Break The Cycle. Build A Greener Future."</h1>
+                <p class="text-lg md:text-xl text-gray-600 mb-6">One platform to shop smart, travel clean, calculate carbon, and act for the planet.</p>
+                <a href="./Profile.html" class="hero-button mt-8 px-6 py-3 text-xl text-white bg-[#2A7B9B] rounded-lg no-underline transition duration-300 hover:hero-button-gradient">
+                    Join Now
+                </a>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="features-gradient py-10 px-4">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row justify-center flex-wrap gap-6">
+                    <!-- Feature Card 1 -->
+                    <div class="feature-card bg-white rounded-xl shadow-md p-6 w-full md:w-[300px] text-center">
+                        <i class="fa-solid fa-calculator text-4xl text-teal-600 mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Calculate Carbon</h3>
+                        <p class="text-gray-600 mb-5">See the true impact of your lifestyle choices. Calculate your carbon emissions and unlock ways to reduce them.</p>
+                        <a href="./Shopping_Assistant.html" class="inline-block px-5 py-3 bg-teal-600 text-white rounded-lg no-underline transition duration-300 hover:feature-card-hover">
+                            Calculate Now
+                        </a>
+                    </div>
+                    
+                    <!-- Feature Card 2 -->
+                    <div class="feature-card bg-white rounded-xl shadow-md p-6 w-full md:w-[300px] text-center">
+                        <i class="fa-solid fa-shoe-prints text-4xl text-teal-600 mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Know Carbon Footprints</h3>
+                        <p class="text-gray-600 mb-5">Gain knowledge about carbon footprints, understand their impact on the planet, and learn ways to reduce them daily.</p>
+                        <a href="./Education.html" class="inline-block px-5 py-3 bg-teal-600 text-white rounded-lg no-underline transition duration-300 hover:feature-card-hover">
+                            Learn More
+                        </a>
+                    </div>
+                    
+                    <!-- Feature Card 3 -->
+                    <div class="feature-card bg-white rounded-xl shadow-md p-6 w-full md:w-[300px] text-center">
+                        <i class="fa-solid fa-route text-4xl text-teal-600 mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Plan Your Eco-Ride</h3>
+                        <p class="text-gray-600 mb-5">Plan your journeys wisely, choose eco-friendly travel options, reduce emissions, and make every ride planet-friendly today.</p>
+                        <a href="./Eco_Ride.html" class="inline-block px-5 py-3 bg-teal-600 text-white rounded-lg no-underline transition duration-300 hover:feature-card-hover">
+                            Plan Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-gradient text-white py-8 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="footer-content flex flex-col md:flex-row justify-between items-center">
+                <div class="footer-section p-4 ">
+                    <div class="flex items-center">
+                    <i class="fa-solid fa-leaf text-3xl md:text-4xl"></i>
+                    <span class="ml-2 text-2xl md:text-3xl font-bold">EcoConnect</span>
+                </div> 
+                </div>
+
+                <div class="footer-section social flex mt-6 md:mt-0">
+                    <div class="follow p-5 rounded-full mx-2">
+                        <i class="fa-brands fa-instagram text-3xl md:text-4xl"></i>
+                    </div>
+                    <div class="follow p-5 rounded-full mx-2">
+                        <i class="fa-brands fa-twitter text-3xl md:text-4xl"></i>
+                    </div>
+                    <div class="follow p-5 rounded-full mx-2">
+                        <i class="fa-brands fa-facebook text-3xl md:text-4xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom text-center mt-8 pt-6 border-t border-white border-opacity-30">
+                <p>© 2025 All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Hamburger menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.getElementById('hamburger-menu');
+            const navMenu = document.querySelector('.first-box-mobile');
+            
+            hamburger.addEventListener('click', function() {
+                navMenu.classList.toggle('hidden');
+                navMenu.classList.toggle('slide-down');
+            });
+            
+            // Close menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                    navMenu.classList.add('hidden');
+                    navMenu.classList.remove('slide-down');
+                }
+            });
+            
+            // Allow keyboard access
+            hamburger.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    navMenu.classList.toggle('hidden');
+                    navMenu.classList.toggle('slide-down');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
