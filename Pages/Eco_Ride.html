@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Ctitle%3EEcoConnect%3C/title%3E%3Ccircle cx='32' cy='32' r='30' fill='%232DAA4F'/%3E%3Cpath d='M20 36c0-6 8-14 18-12 0 0-6 4-8 8 2 0 8 3 8 8 0 6-10 12-18 8 0 0 6-6 6-12-4 0-12 0-12 0z' fill='%23fff' opacity='0.95'/%3E%3Cpath d='M34 22c2 3 4 7 2 12' stroke='%232DAA4F' stroke-width='1.6' stroke-linecap='round' fill='none' opacity='0.9'/%3E%3C/svg%3E">
     <title>Eco-Ride Planner | EcoConnect</title>
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -204,7 +205,7 @@
                     <i class="fa-solid fa-people-group text-xl mr-3"></i>
                     <span class="text-lg">Community Forum</span>
                 </a>
-                <a href="/eco-ride" class="flex items-center p-4 text-gray-800 hover:bg-gray-100">
+                <a href="/eco-ride" class="flex items-center p-4 text-black-800 hover:bg-gray-100">
                     <i class="fa-solid fa-car-side text-xl mr-3"></i>
                     <span class="text-lg">Eco-Ride</span>
                 </a>
@@ -695,29 +696,27 @@
         });
 
         // Function to handle low carbon stays search and display
-        searchStaysBtn.addEventListener('click', async () => { // Added 'async' here
-            hideMessageBox(); // Hide any previous messages
-
-            const stayLocation = stayLocationInput.value.trim();
-            const checkInDate = checkInDateInput.value;
-            const checkOutDate = checkOutDateInput.value;
-
-            if (!stayLocation) {
-                showMessage('Please enter a location for your stay.', 'error');
-                return;
-            }
-            if (!checkInDate || !checkOutDate) {
-                showMessage('Please enter both check-in and check-out dates.', 'error');
-                return;
-            }
-            if (new Date(checkInDate) >= new Date(checkOutDate)) {
-                showMessage('Check-out date must be after check-in date.', 'error');
-                return;
-            }
-
-            // Fallback to simulated data if no API is integrated or if API fails
-            displayStays(getSimulatedStays(stayLocation));
-        });
+        if (searchStaysBtn && stayLocationInput && checkInDateInput && checkOutDateInput) {
+            searchStaysBtn.addEventListener('click', async () => {
+                hideMessageBox();
+                const stayLocation = stayLocationInput.value.trim();
+                const checkInDate = checkInDateInput.value;
+                const checkOutDate = checkOutDateInput.value;
+                if (!stayLocation) {
+                    showMessage('Please enter a location for your stay.', 'error');
+                    return;
+                }
+                if (!checkInDate || !checkOutDate) {
+                    showMessage('Please enter both check-in and check-out dates.', 'error');
+                    return;
+                }
+                if (new Date(checkInDate) >= new Date(checkOutDate)) {
+                    showMessage('Check-out date must be after check-in date.', 'error');
+                    return;
+                }
+                displayStays(getSimulatedStays(stayLocation));
+            });
+        }
 
         // Helper function to get simulated stays based on location
         function getSimulatedStays(searchLocation) {
@@ -936,42 +935,39 @@
                 hamburger.addEventListener('click', function(e) {
                     e.stopPropagation();
                     navMenu.classList.toggle('hidden');
-                    navMenu.classList.toggle('slide-down');
                 });
                 document.addEventListener('click', function(e) {
                     if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
                         navMenu.classList.add('hidden');
-                        navMenu.classList.remove('slide-down');
                     }
                 });
                 hamburger.addEventListener('keydown', function(e) {
                     if (e.key === 'Enter' || e.key === ' ') {
                         navMenu.classList.toggle('hidden');
-                        navMenu.classList.toggle('slide-down');
                     }
                 });
             }
-            // Login timeout logic
-            const loginTimestamp = localStorage.getItem('loginTimestamp');
-            const username = localStorage.getItem('username');
-            if (username && loginTimestamp) {
-                const now = Date.now();
-                if (now - parseInt(loginTimestamp) > 3600000) { // 1 hour
-                    localStorage.clear();
-                    window.location.href = '/login';
-                }
+        });
+        // Login timeout logic
+        const loginTimestamp = localStorage.getItem('loginTimestamp');
+        const username = localStorage.getItem('username');
+        if (username && loginTimestamp) {
+            const now = Date.now();
+            if (now - parseInt(loginTimestamp) > 3600000) { // 1 hour
+                localStorage.clear();
+                window.location.href = '/login';
             }
-            // Change Login to My Profile if logged in
-            const navProfile = document.querySelectorAll('a[href="/login"], a[href="/user"]');
-            navProfile.forEach(link => {
-                if (username) {
-                    link.textContent = 'My Profile';
-                    link.setAttribute('href', '/user');
-                } else {
-                    link.textContent = 'Login';
-                    link.setAttribute('href', '/login');
-                }
-            });
+        }
+        // Change Login to My Profile if logged in
+        const navProfile = document.querySelectorAll('a[href="/login"], a[href="/user"]');
+        navProfile.forEach(link => {
+            if (username) {
+                link.textContent = 'My Profile';
+                link.setAttribute('href', '/user');
+            } else {
+                link.textContent = 'Login';
+                link.setAttribute('href', '/login');
+            }
         });
         // Clear login on window close
         window.addEventListener('unload', function() {
