@@ -551,97 +551,294 @@ footer p {
 
 
 /* Responsive Design */
-@media (max-width: 768px) {
-    header {
+@media (max-width: 900px) {
+    .navbar {
         flex-direction: column;
-        padding: 1rem;
-        text-align: center;
+        align-items: stretch;
+        gap: 0.5rem;
     }
-
-    header h1 {
-        margin-bottom: 1rem;
-    }
-
-    header nav {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .nav-button {
-        padding: 0.4rem 0.8rem;
-        font-size: 0.9rem;
-    }
-
-    main {
-        padding: 0 1rem;
-        margin-top: 1rem; /* Adjust for smaller header height */
-    }
-
-    section {
-        padding: 1.5rem;
-    }
-
-    h2 {
-        font-size: 1.6rem;
-    }
-
-    .metric-card {
-        min-width: 100%;
-        max-width: 100%;
-    }
-
-    #gamification .user-score-area {
+    .first-box {
         flex-direction: column;
+        gap: 0.5rem;
     }
-
-    .user-points-card, .badges-area {
-        min-width: unset;
+    .nav-links {
         width: 100%;
+        text-align: left;
     }
-
-    .event-list {
-        grid-template-columns: 1fr;
-    }
-
-    .modal-content {
-        width: 95%;
-        padding: 20px;
-    }
-
-    .close-button {
-        top: 10px;
-        right: 15px;
-        font-size: 25px;
+    .logo {
+        justify-content: center;
     }
 }
 
-@media (max-width: 480px) {
-    header h1 {
-        font-size: 1.5rem;
+/* --- Adjust main content and cards for mobile --- */
+@media (max-width: 768px) {
+    main {
+        padding: 0 0.5rem;
+        margin-top: 1rem;
     }
-    .nav-button {
-        font-size: 0.85rem;
-        padding: 0.3rem 0.6rem;
+    section {
+        padding: 1rem;
+        margin-bottom: 1rem;
     }
     h2 {
-        font-size: 1.4rem;
+        font-size: 1.3rem;
+        padding-bottom: 0.3rem;
     }
-    .metric-card p {
-        font-size: 2rem;
+    .metric-card {
+        min-width: 100%;
+        max-width: 100%;
+        padding: 1rem;
     }
-    .user-points-card .points {
-        font-size: 2.5rem;
+    #hero-impact .impact-metrics {
+        flex-direction: column;
+        gap: 10px;
+    }
+    #gamification .user-score-area {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .user-points-card, .badges-area {
+        min-width: unset;
+        width: 100%;
+        padding: 1rem;
     }
     .badges-grid img {
         width: 50px;
         height: 50px;
     }
+    .leaderboard {
+        font-size: 0.95rem;
+        padding: 0.5rem;
+    }
+    #events .event-list {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    .event-card {
+        min-width: 0;
+        max-width: 100%;
+    }
+    .event-image {
+        height: 120px;
+    }
+    .modal-content {
+        width: 98%;
+        padding: 10px;
+        max-width: 98vw;
+    }
+    .close-button {
+        top: 8px;
+        right: 10px;
+        font-size: 22px;
+    }
     .suggest-event-btn {
-        padding: 0.8rem 1.5rem;
+        padding: 0.7rem 1.2rem;
         font-size: 1rem;
     }
-    #comment-author, #comment-text, #post-comment-btn {
-        font-size: 0.9rem;
+    .comment-input-area {
+        padding: 1rem;
+        gap: 0.7rem;
+    }
+    #comment-author, #comment-text {
+        font-size: 0.95rem;
         padding: 0.7rem;
+    }
+    #post-comment-btn {
+        font-size: 0.95rem;
+        padding: 0.7rem 1.2rem;
+    }
+    .comment {
+        padding: 0.7rem 1rem;
+    }
+}
+
+/* --- Even smaller screens --- */
+@media (max-width: 480px) {
+    header {
+        padding: 0.5rem;
+    }
+    .logo span {
+        font-size: 1.1rem;
+    }
+    h2 {
+        font-size: 1.1rem;
+    }
+    .metric-card p {
+        font-size: 1.2rem;
+    }
+    .user-points-card .points {
+        font-size: 1.5rem;
+    }
+    .badges-grid img {
+        width: 36px;
+        height: 36px;
+    }
+    .event-image {
+        height: 80px;
+    }
+    .modal-content {
+        padding: 5px;
+        font-size: 0.95rem;
+    }
+    .comment-input-area {
+        padding: 0.5rem;
+    }
+    .comment {
+        padding: 0.5rem 0.7rem;
+    }
+    .footer-content, .footer-section {
+        font-size: 0.85rem;
+    }
+}
+
+/* --- IMPROVED RESPONSIVENESS FOR MOBILE --- */
+
+/* Make header/navbar more mobile friendly */
+@media (max-width: 700px) {
+    header {
+        padding: 0;
+    }
+    .navbar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+        padding: 0.5rem 0.2rem;
+    }
+    .first-box {
+        flex-direction: column;
+        gap: 0.2rem;
+    }
+    .nav-links {
+        width: 100%;
+        text-align: left;
+        padding: 0.3rem 0.5rem;
+    }
+    .logo {
+        justify-content: center;
+        padding: 0.3rem 0.5rem;
+    }
+    .profile {
+        padding: 0.3rem 0.5rem;
+    }
+}
+
+/* Main content and cards for mobile */
+@media (max-width: 600px) {
+    main {
+        padding: 0 0.2rem;
+        margin-top: 0.5rem;
+    }
+    section {
+        padding: 0.7rem;
+        margin-bottom: 0.7rem;
+    }
+    h2 {
+        font-size: 1.05rem;
+        padding-bottom: 0.2rem;
+    }
+    .metric-card {
+        min-width: 100%;
+        max-width: 100%;
+        padding: 0.7rem;
+    }
+    #hero-impact .impact-metrics {
+        flex-direction: column;
+        gap: 7px;
+    }
+    #gamification .user-score-area {
+        flex-direction: column;
+        gap: 7px;
+    }
+    .user-points-card, .badges-area {
+        min-width: unset;
+        width: 100%;
+        padding: 0.7rem;
+    }
+    .badges-grid img {
+        width: 32px;
+        height: 32px;
+    }
+    .leaderboard {
+        font-size: 0.85rem;
+        padding: 0.3rem;
+    }
+    #events .event-list {
+        grid-template-columns: 1fr;
+        gap: 7px;
+    }
+    .event-card {
+        min-width: 0;
+        max-width: 100%;
+    }
+    .event-image {
+        height: 60px;
+    }
+    .modal-content {
+        width: 99%;
+        padding: 4px;
+        max-width: 99vw;
+        font-size: 0.95rem;
+    }
+    .close-button {
+        top: 4px;
+        right: 7px;
+        font-size: 18px;
+    }
+    .suggest-event-btn {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.95rem;
+    }
+    .comment-input-area {
+        padding: 0.5rem;
+        gap: 0.4rem;
+    }
+    #comment-author, #comment-text {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+    }
+    #post-comment-btn {
+        font-size: 0.9rem;
+        padding: 0.5rem 0.8rem;
+    }
+    .comment {
+        padding: 0.4rem 0.5rem;
+    }
+    .footer-content, .footer-section {
+        font-size: 0.8rem;
+    }
+}
+
+/* Make all buttons and touch targets large enough */
+button, .join-button, .details-button, .suggest-event-btn {
+    font-size: 1em;
+    min-width: 44px;
+    min-height: 44px;
+    /* Touch target size for accessibility */
+}
+
+/* Make images scale and not overflow */
+.event-image, .badges-grid img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Modal: allow scrolling on small screens */
+.modal-content {
+    max-height: 95vh;
+    overflow-y: auto;
+}
+
+/* Ensure leaderboard and badges wrap nicely */
+@media (max-width: 400px) {
+    .badges-grid {
+        gap: 4px;
+    }
+    .badges-grid img {
+        width: 22px;
+        height: 22px;
+    }
+    .leaderboard {
+        font-size: 0.7rem;
+        padding: 0.1rem;
     }
 }

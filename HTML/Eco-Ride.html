@@ -211,71 +211,121 @@
             margin-left: -1em;
         }
 
-        .footer {
- background: #2C3E50;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #4CA1AF, #2C3E50);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #4CA1AF, #2C3E50); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-  color: white;
-  padding: 20px 20px 20px 20px;
-  
-}
-
-.footer-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  /* flex-wrap: wrap; */
-}
-
-.footer-section {
-  display : flex;
-  flex: 1;
-  margin: 10px;
-}
-
-.footer-section h3{
-    font-size: 1.7rem;
-    text-align: center;
-}
-
-.footer-section h4 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-}
-
-.footer-section ul {
-  list-style: none;
-  padding: 0;
-}
-
-.footer-section ul li a {
-  color: white;
-  text-decoration: none;
-}
-
-.footer-section ul li a:hover {
-  text-decoration: underline;
-}
-
-.footer-section .social a {
-  margin-right: 10px;
-  color: white;
-  font-size: 1.5rem;
-}
-
-.footer-bottom {
-  text-align: center;
-  margin-top: 20px;
-  border-top: 1px solid rgba(255,255,255,0.3);
-  padding-top: 10px;
-  font-size: 0.9rem;
-}
-
-.follow {
-    padding : 20px;
-    font-size: 1.6rem;
-}
+        /* Hamburger menu styles */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            justify-content: center;
+            align-items: center;
+            margin-left: 10px;
+            z-index: 2001;
+        }
+        .hamburger span {
+            height: 4px;
+            width: 28px;
+            background: #4CAF50;
+            margin: 4px 0;
+            border-radius: 2px;
+            transition: 0.3s;
+            display: block;
+        }
+        @media (max-width: 900px) {
+            .hamburger {
+                display: flex;
+            }
+            .first-box {
+                display: none;
+                background: #fff;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100vw;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+                z-index: 2000;
+            }
+            .first-box.active {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+                animation: slideDown 0.3s;
+            }
+            @keyframes slideDown {
+                from { opacity: 0; transform: translateY(-20px);}
+                to { opacity: 1; transform: translateY(0);}
+            }
+            .navbar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.5rem;
+                padding: 0.5rem 0.2rem;
+                height: auto;
+            }
+            .nav-links {
+                width: 100%;
+                text-align: left;
+                padding: 0.3rem 0.5rem;
+                justify-content: flex-start;
+            }
+            .logo {
+                justify-content: center;
+                padding: 0.3rem 0.5rem;
+            }
+            .profile {
+                padding: 0.3rem 0.5rem;
+            }
+        }
+        @media (max-width: 700px) {
+            .container {
+                padding: 1.2rem;
+                min-width: 0;
+                width: 98vw;
+                height: auto;
+            }
+            .card {
+                padding: 0.7rem;
+            }
+        }
+        @media (max-width: 600px) {
+            .container {
+                max-width: 100vw;
+                padding: 0.2rem;
+                min-width: 0;
+                width: 100vw;
+                border-radius: 0.5rem;
+            }
+            .card {
+                padding: 0.5rem;
+            }
+            .footer-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .footer-section {
+                margin: 5px;
+                justify-content: center;
+            }
+            .footer-section h3, .footer-section h4 {
+                font-size: 1.1rem;
+            }
+            .follow {
+                padding: 10px;
+                font-size: 1.2rem;
+            }
+        }
+        @media (max-width: 400px) {
+            .container {
+                padding: 0.1rem;
+            }
+            .card {
+                padding: 0.2rem;
+            }
+            .footer-content, .footer-section {
+                font-size: 0.8rem;
+            }
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -284,6 +334,13 @@ background: linear-gradient(to right, #4CA1AF, #2C3E50); /* W3C, IE 10+/ Edge, F
             <div class="logo border">
                 <i class="fa-solid fa-leaf"></i>
                 <span>EcoConnect</span>
+            </div>
+
+            <!-- Hamburger menu button -->
+            <div class="hamburger" id="hamburger-menu" aria-label="Open navigation" tabindex="0">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
 
             <div class="first-box">
@@ -295,7 +352,6 @@ background: linear-gradient(to right, #4CA1AF, #2C3E50); /* W3C, IE 10+/ Edge, F
                         </a>
                     </div>
                 </div>
-
                 <div class="nav-links border">
                     <div class="link">
                         <a href="./Community_Forum.html">
@@ -304,7 +360,6 @@ background: linear-gradient(to right, #4CA1AF, #2C3E50); /* W3C, IE 10+/ Edge, F
                         </a>
                     </div>
                 </div>
-
                 <div class="nav-links border">
                     <div class="link">
                         <a href="./Eco-Ride.html">
@@ -313,7 +368,6 @@ background: linear-gradient(to right, #4CA1AF, #2C3E50); /* W3C, IE 10+/ Edge, F
                         </a>
                     </div>
                 </div>
-
                 <div class="nav-links border">
                     <div class="link">
                         <a href="./Shopping_Assistant.html">
@@ -322,7 +376,6 @@ background: linear-gradient(to right, #4CA1AF, #2C3E50); /* W3C, IE 10+/ Edge, F
                         </a>
                     </div>
                 </div>
-
                 <div class="nav-links border">
                     <div class="link">
                         <a href="./Education.html">
@@ -332,7 +385,6 @@ background: linear-gradient(to right, #4CA1AF, #2C3E50); /* W3C, IE 10+/ Edge, F
                     </div>
                 </div>
             </div>
-
             <div class="nav-links border">
                 <div class="profile">
                     <a href="./Profile.html">
@@ -1131,6 +1183,27 @@ background: linear-gradient(to right, #4CA1AF, #2C3E50); /* W3C, IE 10+/ Edge, F
                 });
             }
         }
+
+        // Hamburger menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.getElementById('hamburger-menu');
+            const navMenu = document.querySelector('.first-box');
+            hamburger.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+            });
+            // Optional: close menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                    navMenu.classList.remove('active');
+                }
+            });
+            // Optional: allow keyboard access
+            hamburger.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    navMenu.classList.toggle('active');
+                }
+            });
+        });
     </script>
 
     <footer class="footer">

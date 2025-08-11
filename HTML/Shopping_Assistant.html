@@ -241,14 +241,140 @@ background: linear-gradient(to right, #4CA1AF, #2C3E50); /* W3C, IE 10+/ Edge, F
     padding : 20px;
     font-size: 1.6rem;
 }
+
+/* Hamburger menu styles */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+    z-index: 2001;
+}
+.hamburger span {
+    height: 4px;
+    width: 28px;
+    background: #4CAF50;
+    margin: 4px 0;
+    border-radius: 2px;
+    transition: 0.3s;
+    display: block;
+}
+@media (max-width: 900px) {
+    .hamburger {
+        display: flex;
+    }
+    .first-box {
+        display: none;
+        background: #fff;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        width: 100vw;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        z-index: 2000;
+    }
+    .first-box.active {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        animation: slideDown 0.3s;
+    }
+    @keyframes slideDown {
+        from { opacity: 0; transform: translateY(-20px);}
+        to { opacity: 1; transform: translateY(0);}
+    }
+    .navbar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+        padding: 0.5rem 0.2rem;
+        height: auto;
+    }
+    .nav-links {
+        width: 100%;
+        text-align: left;
+        padding: 0.3rem 0.5rem;
+        justify-content: flex-start;
+    }
+    .logo {
+        justify-content: center;
+        padding: 0.3rem 0.5rem;
+    }
+    .profile {
+        padding: 0.3rem 0.5rem;
+    }
+}
+@media (max-width: 700px) {
+    .calculator-container {
+        padding: 0.5rem;
+    }
+    .tab-inner {
+        padding: 0.5rem;
+    }
+    .tab-nav {
+        padding: 0.2rem;
+    }
+}
+@media (max-width: 600px) {
+    .calculator-container {
+        max-width: 100vw;
+        padding: 0.2rem;
+    }
+    .tab-inner {
+        max-width: 100vw;
+        padding: 0.2rem;
+    }
+    .tab-btn {
+        font-size: 0.9rem;
+        padding: 0.3rem 0.7rem;
+    }
+    .tab-content {
+        padding: 0.5rem;
+    }
+    .footer-content {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .footer-section {
+        margin: 5px;
+        justify-content: center;
+    }
+    .footer-section h3, .footer-section h4 {
+        font-size: 1.1rem;
+    }
+    .follow {
+        padding: 10px;
+        font-size: 1.2rem;
+    }
+}
+@media (max-width: 400px) {
+    .tab-btn {
+        font-size: 0.8rem;
+        padding: 0.2rem 0.4rem;
+    }
+    .footer-content, .footer-section {
+        font-size: 0.8rem;
+    }
+}
     </style>
 </head>
-<body class="bg-gray-100 font-sans min-h-screen"> <!-- Removed flex centering classes -->
+<body class="bg-gray-100 font-sans min-h-screen">
     <header>
         <div class="navbar border">
             <div class="logo border">
                 <i class="fa-solid fa-leaf"></i>
                 <span>EcoConnect</span>
+            </div>
+
+            <!-- Hamburger menu button -->
+            <div class="hamburger" id="hamburger-menu" aria-label="Open navigation" tabindex="0">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
 
             <div class="first-box">
@@ -260,7 +386,6 @@ background: linear-gradient(to right, #4CA1AF, #2C3E50); /* W3C, IE 10+/ Edge, F
                         </a>
                     </div>
                 </div>
-
                 <div class="nav-links border">
                     <div class="link">
                         <a href="./Community_Forum.html">
@@ -269,7 +394,6 @@ background: linear-gradient(to right, #4CA1AF, #2C3E50); /* W3C, IE 10+/ Edge, F
                         </a>
                     </div>
                 </div>
-
                 <div class="nav-links border">
                     <div class="link">
                         <a href="./Eco-Ride.html">
@@ -278,7 +402,6 @@ background: linear-gradient(to right, #4CA1AF, #2C3E50); /* W3C, IE 10+/ Edge, F
                         </a>
                     </div>
                 </div>
-
                 <div class="nav-links border">
                     <div class="link">
                         <a href="./Shopping_Assistant.html">
@@ -287,7 +410,6 @@ background: linear-gradient(to right, #4CA1AF, #2C3E50); /* W3C, IE 10+/ Edge, F
                         </a>
                     </div>
                 </div>
-
                 <div class="nav-links border">
                     <div class="link">
                         <a href="./Education.html">
@@ -297,7 +419,6 @@ background: linear-gradient(to right, #4CA1AF, #2C3E50); /* W3C, IE 10+/ Edge, F
                     </div>
                 </div>
             </div>
-
             <div class="nav-links border">
                 <div class="profile">
                     <a href="./Profile.html">
@@ -1199,9 +1320,9 @@ background: linear-gradient(to right, #4CA1AF, #2C3E50); /* W3C, IE 10+/ Edge, F
                                     }
                                 }
                             }
+                            }
                         }
-                    }
-                });
+                    });
             }
         }
 
@@ -1297,6 +1418,27 @@ background: linear-gradient(to right, #4CA1AF, #2C3E50); /* W3C, IE 10+/ Edge, F
             updateResults(); // Update chart and total
             openTab('transport'); // Go back to the first tab
         }
+
+        // Hamburger menu toggle
+    document.addEventListener('DOMContentLoaded', function() {
+        const hamburger = document.getElementById('hamburger-menu');
+        const navMenu = document.querySelector('.first-box');
+        hamburger.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+        });
+        // Optional: close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                navMenu.classList.remove('active');
+            }
+        });
+        // Optional: allow keyboard access
+        hamburger.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                navMenu.classList.toggle('active');
+            }
+        });
+    });
 
         // Initial setup on page load
         document.addEventListener('DOMContentLoaded', () => {
