@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const eventsData = [
         {
             id: 'event-1',
-            image: 'Community_Tree_Planting_Drive.jpg',
+            image: '../Images/Community_Tree_Planting_Drive.jpg',
             title: 'Community Tree Planting Drive',
             date: 'August 10, 2025',
             location: 'Eco Park, Sector 24, Delhi',
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             id: 'event-2',
-            image: 'Beach_Cleanup_Drive.jpg',
+            image: '../Images/Beach_Cleanup_Drive.jpg',
             title: 'Beach Cleanup Drive',
             date: 'August 25, 2025',
             location: 'Yamuna Riverbank, Okhla',
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             id: 'event-3',
-            image: 'Home_Composting_Workshop.jpg',
+            image: '../Images/Home_Composting_Workshop.jpg',
             title: 'Home Composting Workshop',
             date: 'September 5, 2025',
             location: 'Community Hall, Green Valley',
