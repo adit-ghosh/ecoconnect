@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | EcoConnect</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#7494ec',
+                        secondary: '#4CAF50',
+                        accent: '#FFC107',
+                        dark: '#2C3E50',
+                        light: '#F0F4F8',
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        .navbar-gradient {
+            background: linear-gradient(90deg, rgba(42, 123, 155, 1) 0%, rgba(62, 157, 145, 1) 22%, rgba(72, 173, 140, 1) 33%, rgba(87, 199, 133, 1) 50%, rgba(237, 221, 83, 1) 100%);
+        }
+        .footer-gradient {
+            background: linear-gradient(to right, #4CA1AF, #2C3E50);
+        }
+        .nav-link-hover:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-gradient-to-r from-[#e2e2e2] to-[#c9d6ff]">
+    <!-- Header -->
+    <header>
+        <div class="navbar-gradient fixed w-full h-20 flex justify-center items-center px-5 py-5 text-white z-50">
+            <div class="flex justify-between items-center w-full max-w-7xl">
+                <a href="/">
+                <div class="flex items-center">
+                    <i class="fa-solid fa-leaf text-3xl md:text-4xl"></i>
+                    <span class="ml-2 text-2xl md:text-3xl font-bold">EcoConnect</span>
+                </div>
+                </a>
+                <div class="first-box hidden md:flex justify-evenly items-center flex-1 mx-4">
+                    <div class="nav-link-hover p-3 rounded"><a href="/community" class="flex items-center text-white no-underline"><i class="fa-solid fa-people-group text-xl md:text-2xl"></i><span class="ml-2 text-base md:text-xl">Community Forum</span></a></div>
+                    <div class="nav-link-hover p-3 rounded"><a href="/eco-ride" class="flex items-center text-white no-underline"><i class="fa-solid fa-car-side text-xl md:text-2xl"></i><span class="ml-2 text-base md:text-xl">Eco-Ride</span></a></div>
+                    <div class="nav-link-hover p-3 rounded"><a href="/shop" class="flex items-center text-white no-underline"><i class="fa-solid fa-cart-shopping text-xl md:text-2xl"></i><span class="ml-2 text-base md:text-xl">Shopping Assistant</span></a></div>
+                    <div class="nav-link-hover p-3 rounded"><a href="/education" class="flex items-center text-white no-underline"><i class="fa-solid fa-book text-xl md:text-2xl"></i><span class="ml-2 text-base md:text-xl">Education</span></a></div>
+                </div>
+                <div class="nav-link-hover p-3 rounded"><a href="/user" class="flex items-center text-white no-underline"><i class="fa-solid fa-user text-xl md:text-2xl"></i><span class="ml-2 text-base md:text-xl">My Profile</span></a></div>
+            </div>
+        </div>
+    </header>
+    <!-- Main Content -->
+    <main class="flex-grow flex items-center justify-center pt-32 pb-16 px-4">
+        <div class="w-full max-w-xl mx-auto bg-white rounded-3xl shadow-form p-8">
+            <div class="flex flex-col items-center mb-8">
+                <div class="w-24 h-24 rounded-full bg-primary flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-user text-white text-5xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-primary mb-1" id="profile-username">Username</h2>
+                <p class="text-gray-600 mb-2" id="profile-email">user@email.com</p>
+                <span class="inline-block bg-secondary text-white px-4 py-2 rounded-full font-semibold text-lg mb-2">Eco Points: <span id="profile-eco-points">0</span></span>
+                <a href="/community" class="text-primary font-semibold underline mt-2">Go to Community Forum</a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <a href="/eco-ride" class="block bg-primary text-white rounded-xl p-4 text-center font-semibold hover:bg-blue-700 transition"><i class="fa-solid fa-car-side mr-2"></i> Eco-Ride</a>
+                <a href="/shop" class="block bg-primary text-white rounded-xl p-4 text-center font-semibold hover:bg-blue-700 transition"><i class="fa-solid fa-cart-shopping mr-2"></i> Shopping Assistant</a>
+                <a href="/education" class="block bg-primary text-white rounded-xl p-4 text-center font-semibold hover:bg-blue-700 transition"><i class="fa-solid fa-book mr-2"></i> Education</a>
+                <a href="/community" class="block bg-primary text-white rounded-xl p-4 text-center font-semibold hover:bg-blue-700 transition"><i class="fa-solid fa-people-group mr-2"></i> Community Forum</a>
+            </div>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer class="footer-gradient text-white py-8 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="footer-content flex flex-col md:flex-row justify-between items-center">
+                <div class="footer-section p-4 flex items-center">
+                    <i class="fa-solid fa-leaf text-3xl md:text-4xl"></i>
+                    <span class="ml-2 text-2xl md:text-3xl font-bold">EcoConnect</span>
+                </div>
+                <div class="footer-section social flex mt-6 md:mt-0 md:ml-auto">
+                    <div class="follow p-5 rounded-full mx-2"><i class="fa-brands fa-instagram text-3xl md:text-4xl"></i></div>
+                    <div class="follow p-5 rounded-full mx-2"><i class="fa-brands fa-twitter text-3xl md:text-4xl"></i></div>
+                    <div class="follow p-5 rounded-full mx-2"><i class="fa-brands fa-facebook text-3xl md:text-4xl"></i></div>
+                </div>
+            </div>
+            <div class="footer-bottom text-center mt-8 pt-6 border-t border-white border-opacity-30">
+                <p>© 2025 All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Hamburger menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.getElementById('hamburger-menu');
+            const navMenu = document.querySelector('.first-box-mobile');
+            if (hamburger && navMenu) {
+                hamburger.addEventListener('click', function() {
+                    navMenu.classList.toggle('hidden');
+                    navMenu.classList.toggle('slide-down');
+                });
+                document.addEventListener('click', function(e) {
+                    if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                        navMenu.classList.add('hidden');
+                        navMenu.classList.remove('slide-down');
+                    }
+                });
+                hamburger.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        navMenu.classList.toggle('hidden');
+                        navMenu.classList.toggle('slide-down');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

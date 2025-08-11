@@ -6,7 +6,6 @@
     <title>EcoConnect - Community Forum</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌱%3C/text%3E%3C/svg%3E">
     <script>
         tailwind.config = {
             theme: {
@@ -75,7 +74,7 @@
         <div class="navbar-gradient fixed w-full h-20 flex justify-center items-center px-5 py-5 text-white z-50">
             <div class="flex justify-between items-center w-full max-w-7xl">
                 <!-- Logo -->
-                <a href="./index.html">
+                <a href="/">
                 <div class="flex items-center">
                     <i class="fa-solid fa-leaf text-3xl md:text-4xl"></i>
                     <span class="ml-2 text-2xl md:text-3xl font-bold">EcoConnect</span>
@@ -92,28 +91,28 @@
                 <!-- Navigation Links -->
                 <div class="first-box hidden md:flex justify-evenly items-center flex-1 mx-4">
                      <div class="nav-link-hover p-3 rounded">
-                        <a href="./Community_Forum.html" class="flex items-center text-white no-underline">
+                        <a href="/community" class="flex items-center text-white no-underline">
                             <i class="fa-solid fa-people-group text-xl md:text-2xl"></i>
                             <span class="ml-2 text-base md:text-xl">Community Forum</span>
                         </a>
                     </div>
                     
                     <div class="nav-link-hover p-3 rounded">
-                        <a href="./Eco_Ride.html" class="flex items-center text-white no-underline">
+                        <a href="/eco-ride" class="flex items-center text-white no-underline">
                             <i class="fa-solid fa-car-side text-xl md:text-2xl"></i>
                             <span class="ml-2 text-base md:text-xl">Eco-Ride</span>
                         </a>
                     </div>
                     
                     <div class="nav-link-hover p-3 rounded">
-                        <a href="./Shopping_Assistant.html" class="flex items-center text-white no-underline">
+                        <a href="/shop" class="flex items-center text-white no-underline">
                             <i class="fa-solid fa-cart-shopping text-xl md:text-2xl"></i>
                             <span class="ml-2 text-base md:text-xl">Shopping Assistant</span>
                         </a>
                     </div>
                     
                     <div class="nav-link-hover p-3 rounded">
-                        <a href="./Education.html" class="flex items-center text-white no-underline">
+                        <a href="/education" class="flex items-center text-white no-underline">
                             <i class="fa-solid fa-book text-xl md:text-2xl"></i>
                             <span class="ml-2 text-base md:text-xl">Education</span>
                         </a>
@@ -122,7 +121,7 @@
 
                 <!-- Profile Link -->
                 <div class="nav-link-hover p-3 rounded">
-                    <a href="./Profile.html" class="flex items-center text-white no-underline">
+                    <a href="/login" class="flex items-center text-white no-underline">
                         <i class="fa-solid fa-user text-xl md:text-2xl"></i>
                         <span class="ml-2 text-base md:text-xl">Profile</span>
                     </a>
@@ -130,38 +129,36 @@
             </div>
         </div>
 
-
         <!-- Mobile Navigation -->
         <div class="first-box-mobile hidden absolute top-20 left-0 w-full bg-white shadow-lg z-40 md:hidden">
             <div class="flex flex-col py-2">
-                <a href="./index.html" class="flex items-center p-4 text-gray-800 hover:bg-gray-100">
+                <a href="/" class="flex items-center p-4 text-gray-800 hover:bg-gray-100">
                     <i class="fa-solid fa-house text-xl mr-3"></i>
                     <span class="text-lg">Home</span>
                 </a>
-                <a href="./Community_Forum.html" class="flex items-center p-4 text-gray-800 hover:bg-gray-100">
+                <a href="/community" class="flex items-center p-4 text-gray-800 hover:bg-gray-100">
                     <i class="fa-solid fa-people-group text-xl mr-3"></i>
                     <span class="text-lg">Community Forum</span>
                 </a>
-                <a href="./Eco-Ride.html" class="flex items-center p-4 text-gray-800 hover:bg-gray-100">
+                <a href="/eco-ride" class="flex items-center p-4 text-gray-800 hover:bg-gray-100">
                     <i class="fa-solid fa-car-side text-xl mr-3"></i>
-                    <span class="text-lg font-bold">Eco-Ride</span>
+                    <span class="text-lg">Eco-Ride</span>
                 </a>
-                <a href="./Shopping_Assistant.html" class="flex items-center p-4 text-gray-800 hover:bg-gray-100">
+                <a href="/shop" class="flex items-center p-4 text-gray-800 hover:bg-gray-100">
                     <i class="fa-solid fa-cart-shopping text-xl mr-3"></i>
                     <span class="text-lg">Shopping Assistant</span>
                 </a>
-                <a href="./Education.html" class="flex items-center p-4 text-gray-800 hover:bg-gray-100">
+                <a href="/education" class="flex items-center p-4 text-gray-800 hover:bg-gray-100">
                     <i class="fa-solid fa-book text-xl mr-3"></i>
                     <span class="text-lg">Education</span>
                 </a>
-                <a href="./Profile.html" class="flex items-center p-4 text-gray-800 hover:bg-gray-100">
+                <a href="/login" class="flex items-center p-4 text-gray-800 hover:bg-gray-100">
                     <i class="fa-solid fa-user text-xl mr-3"></i>
                     <span class="text-lg">Profile</span>
                 </a>
             </div>
         </div>
     </header>
-
 
     <main class="max-w-7xl mx-auto px-4 py-8 pt-24">
         <!-- Hero Section -->
@@ -396,26 +393,54 @@
         document.addEventListener('DOMContentLoaded', function() {
             const hamburger = document.getElementById('hamburger-menu');
             const navMenu = document.querySelector('.first-box-mobile');
-            hamburger.addEventListener('click', function() {
-                navMenu.classList.toggle('hidden');
-                navMenu.classList.toggle('slide-down');
-            });
-            // Close menu when clicking outside
-            document.addEventListener('click', function(e) {
-                if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
-                    navMenu.classList.add('hidden');
-                    navMenu.classList.remove('slide-down');
-                }
-            });
-            // Allow keyboard access
-            hamburger.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter' || e.key === ' ') {
+            if (hamburger && navMenu) {
+                hamburger.addEventListener('click', function() {
                     navMenu.classList.toggle('hidden');
                     navMenu.classList.toggle('slide-down');
+                });
+                document.addEventListener('click', function(e) {
+                    if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                        navMenu.classList.add('hidden');
+                        navMenu.classList.remove('slide-down');
+                    }
+                });
+                hamburger.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        navMenu.classList.toggle('hidden');
+                        navMenu.classList.toggle('slide-down');
+                    }
+                });
+            }
+            // Login timeout logic
+            const loginTimestamp = localStorage.getItem('loginTimestamp');
+            const username = localStorage.getItem('username');
+            if (username && loginTimestamp) {
+                const now = Date.now();
+                if (now - parseInt(loginTimestamp) > 3600000) { // 1 hour
+                    localStorage.clear();
+                    window.location.href = '/login';
+                }
+            }
+            // Change Login to My Profile if logged in
+            const navProfile = document.querySelectorAll('a[href="/login"], a[href="/user"]');
+            navProfile.forEach(link => {
+                if (username) {
+                    link.textContent = 'My Profile';
+                    link.setAttribute('href', '/user');
+                } else {
+                    link.textContent = 'Login';
+                    link.setAttribute('href', '/login');
                 }
             });
         });
-        
+        // Clear login on window close
+        window.addEventListener('unload', function() {
+            localStorage.removeItem('username');
+            localStorage.removeItem('email');
+            localStorage.removeItem('loginTimestamp');
+        });
+    </script>
+    <script>
         document.addEventListener('DOMContentLoaded', () => {
             // User data
             let userPoints = localStorage.getItem('userPoints') ? parseInt(localStorage.getItem('userPoints')) : 0;
@@ -431,7 +456,7 @@
             const eventsData = [
                 {
                     id: 'event-1',
-                    image: '../Images/Community_Tree_Planting_Drive.jpg',
+                    image: 'https://images.unsplash.com/photo-1504813184591-01572f98c85f?auto=format&fit=crop&q=80&w=1471', 
                     title: 'Community Tree Planting Drive',
                     date: 'August 10, 2025',
                     location: 'Eco Park, Sector 24, Delhi',
@@ -439,7 +464,7 @@
                 },
                 {
                     id: 'event-2',
-                    image: '../Images/Beach_Cleanup_Drive.jpg',
+                    image: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=1474',
                     title: 'Beach Cleanup Drive',
                     date: 'August 25, 2025',
                     location: 'Yamuna Riverbank, Okhla',
@@ -720,6 +745,13 @@
                 
                 // Save to localStorage
                 localStorage.setItem('userPoints', userPoints);
+                
+                // When user earns points:
+                fetch('/api/eco-points', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ points: pointsEarned })
+                });
                 
                 // Check for badge earning
                 if (score === questions.length && !earnedBadges.includes('quiz-master')) {
